@@ -18,6 +18,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  images: {
+    // صور الفعاليات العامة من Supabase Storage فقط (حاوية event-media)
+    remotePatterns: [
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/event-media/**" },
+    ],
+  },
   experimental: {
     // صفحة 404 للمسارات خارج أي لغة (مثل /unknown.txt)
     globalNotFound: true,

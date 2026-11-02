@@ -148,7 +148,8 @@
       "available": "Tickets available",
       "sold_out": "Sold out",
       "cancelled": "Cancelled",
-      "ended": "Ended"
+      "ended": "Ended",
+      "no_tickets": "Tickets not available yet"
     },
     "byOrganizer": "By {name}",
     "bookNow": "Book now",
@@ -162,7 +163,38 @@
     "activeFilters": "Filters",
     "clearFilters": "Clear filters",
     "emptyTitle": "No matching events",
-    "emptyDescription": "We couldn't find published events matching your search right now. Try different filters or check back later."
+    "emptyDescription": "We couldn't find published events matching your search right now. Try different filters or check back later.",
+    "searchLabel": "Search events",
+    "searchPlaceholder": "Search by event name, description, organizer or venue…",
+    "searchButton": "Search",
+    "filtersLegend": "Filters",
+    "filter": {
+      "category": "Category",
+      "area": "Governorate",
+      "date": "When",
+      "day": "Specific day",
+      "price": "Price",
+      "sort": "Sort by",
+      "all": "All categories",
+      "allAreas": "All governorates",
+      "anyPrice": "Any price",
+      "free": "Free",
+      "paid": "Paid"
+    },
+    "sort": {
+      "date": "Soonest first",
+      "price-asc": "Price: low to high",
+      "price-desc": "Price: high to low",
+      "newest": "Newest"
+    },
+    "resultsCount": "{count, plural, =0 {No results} one {# event} other {# events}}",
+    "removeFilter": "Remove {name}",
+    "noEventsTitle": "No published events yet",
+    "noEventsDescription": "New events will appear here as soon as our team approves them.",
+    "pagination": "Pagination",
+    "prevPage": "Previous",
+    "nextPage": "Next",
+    "pageOf": "Page {page} of {count}"
   },
   "Footer": {
     "tagline": "Discover and book the best events in Kuwait and the Gulf.",
@@ -430,5 +462,35 @@
     "featurePayments": "Secure KNET & card payments",
     "featureTickets": "Instant QR tickets on your phone",
     "featureBilingual": "Full Arabic & English experience"
+  },
+  "EventDetails": {
+    "date": "Date",
+    "time": "Time",
+    "kuwaitTime": "Kuwait time",
+    "location": "Location",
+    "online": "Online event",
+    "locationTba": "Venue to be announced",
+    "about": "About this event",
+    "gallery": "Gallery",
+    "map": "Map",
+    "mapTitle": "Map of {place}",
+    "openInMaps": "Open in Google Maps",
+    "tickets": "Tickets",
+    "noTickets": "The organizer hasn't set up tickets yet.",
+    "seatsLeft": "{count, plural, =0 {Sold out} one {# seat left} other {# seats left}}",
+    "salesStart": "Sales start {date}",
+    "ticketState": {
+      "on_sale": "On sale",
+      "sold_out": "Sold out",
+      "not_started": "Not on sale yet",
+      "ended": "Sales ended"
+    },
+    "cancelledTitle": "This event was cancelled",
+    "share": "Share",
+    "linkCopied": "Link copied",
+    "copyFailed": "Couldn't copy the link",
+    "addToCalendar": "Add to calendar",
+    "googleCalendar": "Google Calendar",
+    "similar": "Similar events"
   }
 }

@@ -48,7 +48,7 @@ test.describe("اللغة والاتجاه", () => {
     }
     await expect(page).toHaveURL(/\/en\/events\?category=music$/);
     await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
-    await expect(page.getByText("Music", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("active-filters").getByText("Music", { exact: true })).toBeVisible();
 
     await page.goto("/");
     await expect(page).toHaveURL(/\/en$/);

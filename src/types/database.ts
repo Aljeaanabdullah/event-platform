@@ -505,6 +505,7 @@ export type Database = {
           description_en: string | null;
           id: string;
           logo_path: string | null;
+          is_test: boolean;
           name_ar: string;
           name_en: string;
           rejection_reason: string | null;
@@ -526,6 +527,7 @@ export type Database = {
           description_en?: string | null;
           id?: string;
           logo_path?: string | null;
+          is_test?: boolean;
           name_ar: string;
           name_en: string;
           rejection_reason?: string | null;
@@ -547,6 +549,7 @@ export type Database = {
           description_en?: string | null;
           id?: string;
           logo_path?: string | null;
+          is_test?: boolean;
           name_ar?: string;
           name_en?: string;
           rejection_reason?: string | null;
@@ -604,6 +607,8 @@ export type Database = {
           created_at: string;
           currency: string;
           failure_reason: string | null;
+          expires_at: string | null;
+          gateway_fee_fils: number | null;
           id: string;
           idempotency_key: string;
           method: string | null;
@@ -620,6 +625,8 @@ export type Database = {
           created_at?: string;
           currency?: string;
           failure_reason?: string | null;
+          expires_at?: string | null;
+          gateway_fee_fils?: number | null;
           id?: string;
           idempotency_key: string;
           method?: string | null;
@@ -636,6 +643,8 @@ export type Database = {
           created_at?: string;
           currency?: string;
           failure_reason?: string | null;
+          expires_at?: string | null;
+          gateway_fee_fils?: number | null;
           id?: string;
           idempotency_key?: string;
           method?: string | null;
@@ -1064,6 +1073,102 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      attach_payment_session: {
+        Args: { p_invoice_id?: string; p_payment_id: string; p_provider_payment_id: string };
+        Returns: undefined;
+      };
+      check_in_ticket_code: {
+        Args: { p_code: string; p_event_id?: string };
+        Returns: Json;
+      };
+      get_event_details: {
+        Args: { p_include_test?: boolean; p_slug: string };
+        Returns: Json;
+      };
+      get_organizer_dashboard: {
+        Args: { p_organizer_id: string };
+        Returns: Json;
+      };
+      get_organizer_event_sales: {
+        Args: { p_organizer_id: string };
+        Returns: {
+          capacity: number;
+          checked_in: number;
+          commission_fils: number;
+          event_id: string;
+          gross_fils: number;
+          net_fils: number;
+          orders_paid: number;
+          slug: string;
+          starts_at: string;
+          status: Database["public"]["Enums"]["event_status"];
+          tickets_reserved: number;
+          tickets_sold: number;
+          title_ar: string;
+          title_en: string;
+        }[];
+      };
+      mark_payment_failed: {
+        Args: {
+          p_payment_id: string;
+          p_raw?: Json;
+          p_reason?: string;
+          p_status: Database["public"]["Enums"]["payment_status"];
+        };
+        Returns: string;
+      };
+      search_events: {
+        Args: {
+          p_category?: string;
+          p_exclude?: string;
+          p_featured?: boolean;
+          p_from?: string;
+          p_governorate?: string;
+          p_ids?: string[];
+          p_include_test?: boolean;
+          p_limit?: number;
+          p_offset?: number;
+          p_price?: string;
+          p_q?: string;
+          p_sort?: string;
+          p_to?: string;
+        };
+        Returns: {
+          category_slug: string;
+          cover_image_path: string | null;
+          ends_at: string;
+          governorate: Database["public"]["Enums"]["kuwait_governorate"] | null;
+          has_tickets: boolean;
+          id: string;
+          is_featured: boolean;
+          is_online: boolean;
+          min_price_fils: number | null;
+          organizer_name_ar: string;
+          organizer_name_en: string;
+          seats_available: number;
+          slug: string;
+          starts_at: string;
+          title_ar: string;
+          title_en: string;
+          total_count: number;
+          venue_name_ar: string | null;
+          venue_name_en: string | null;
+        }[];
+      };
+      start_order_payment: {
+        Args: { p_order_id: string; p_provider: string };
+        Returns: {
+          amount_fils: number;
+          currency: string;
+          expires_at: string;
+          order_number: string;
+          payment_id: string;
+        }[];
+      };
+      ticket_available: {
+        Args: { p_tt: Database["public"]["Tables"]["ticket_types"]["Row"] };
+        Returns: number;
+      };
       _finalize_order: {
         Args: { p_from_reserved: boolean; p_order_id: string };
         Returns: undefined;

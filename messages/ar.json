@@ -148,7 +148,8 @@
       "available": "التذاكر متاحة",
       "sold_out": "نفدت التذاكر",
       "cancelled": "ملغاة",
-      "ended": "انتهت"
+      "ended": "انتهت",
+      "no_tickets": "التذاكر غير متاحة بعد"
     },
     "byOrganizer": "تنظيم {name}",
     "bookNow": "احجز الآن",
@@ -162,7 +163,38 @@
     "activeFilters": "عوامل التصفية",
     "clearFilters": "مسح عوامل التصفية",
     "emptyTitle": "لا توجد فعاليات مطابقة",
-    "emptyDescription": "لم نعثر على فعاليات منشورة تطابق بحثك حاليًا. جرّب تغيير عوامل التصفية أو عُد لاحقًا."
+    "emptyDescription": "لم نعثر على فعاليات منشورة تطابق بحثك حاليًا. جرّب تغيير عوامل التصفية أو عُد لاحقًا.",
+    "searchLabel": "البحث في الفعاليات",
+    "searchPlaceholder": "ابحث باسم الفعالية أو الوصف أو المنظّم أو المكان…",
+    "searchButton": "بحث",
+    "filtersLegend": "عوامل التصفية",
+    "filter": {
+      "category": "التصنيف",
+      "area": "المحافظة",
+      "date": "الفترة",
+      "day": "يوم محدد",
+      "price": "السعر",
+      "sort": "الترتيب",
+      "all": "كل التصنيفات",
+      "allAreas": "كل المحافظات",
+      "anyPrice": "أي سعر",
+      "free": "مجانية",
+      "paid": "مدفوعة"
+    },
+    "sort": {
+      "date": "الأقرب موعدًا",
+      "price-asc": "السعر: الأقل أولًا",
+      "price-desc": "السعر: الأعلى أولًا",
+      "newest": "الأحدث نشرًا"
+    },
+    "resultsCount": "{count, plural, =0 {لا توجد نتائج} one {فعالية واحدة} two {فعاليتان} few {# فعاليات} many {# فعالية} other {# فعالية}}",
+    "removeFilter": "إزالة {name}",
+    "noEventsTitle": "لا توجد فعاليات منشورة بعد",
+    "noEventsDescription": "عندما يعتمد فريقنا فعاليات جديدة ستظهر هنا مباشرة.",
+    "pagination": "التنقل بين الصفحات",
+    "prevPage": "السابق",
+    "nextPage": "التالي",
+    "pageOf": "صفحة {page} من {count}"
   },
   "Footer": {
     "tagline": "منصة لاكتشاف وحجز أفضل الفعاليات في الكويت والخليج.",
@@ -430,5 +462,35 @@
     "featurePayments": "دفع آمن عبر KNET والبطاقات",
     "featureTickets": "تذاكر QR فورية على جوالك",
     "featureBilingual": "تجربة عربية وإنجليزية كاملة"
+  },
+  "EventDetails": {
+    "date": "التاريخ",
+    "time": "الوقت",
+    "kuwaitTime": "بتوقيت الكويت",
+    "location": "المكان",
+    "online": "فعالية عبر الإنترنت",
+    "locationTba": "سيُعلن المكان لاحقًا",
+    "about": "عن الفعالية",
+    "gallery": "معرض الصور",
+    "map": "الموقع على الخريطة",
+    "mapTitle": "خريطة موقع {place}",
+    "openInMaps": "فتح في خرائط Google",
+    "tickets": "التذاكر",
+    "noTickets": "لم يُحدد المنظّم التذاكر بعد.",
+    "seatsLeft": "{count, plural, =0 {نفدت} one {مقعد واحد متبقٍ} two {مقعدان متبقيان} few {# مقاعد متبقية} many {# مقعدًا متبقيًا} other {# مقعد متبقٍ}}",
+    "salesStart": "يبدأ البيع {date}",
+    "ticketState": {
+      "on_sale": "متاحة",
+      "sold_out": "نفدت",
+      "not_started": "لم يبدأ البيع",
+      "ended": "انتهى البيع"
+    },
+    "cancelledTitle": "أُلغيت هذه الفعالية",
+    "share": "مشاركة",
+    "linkCopied": "تم نسخ الرابط",
+    "copyFailed": "تعذّر نسخ الرابط",
+    "addToCalendar": "أضف إلى التقويم",
+    "googleCalendar": "تقويم Google",
+    "similar": "فعاليات مشابهة"
   }
 }

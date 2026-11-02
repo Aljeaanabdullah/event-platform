@@ -57,7 +57,7 @@ export function FeaturedCarousel({ children, count }: { children: React.ReactNod
         onClick={() => go(page - 1)}
         disabled={page === 0}
         aria-label={t("previous")}
-        className={cn(arrow, "-start-5 xl:-start-14")}
+        className={cn(arrow, "-start-5 2xl:-start-14")}
       >
         <ChevronRight className="size-5 ltr:hidden" aria-hidden />
         <ChevronLeft className="size-5 rtl:hidden" aria-hidden />
@@ -75,7 +75,7 @@ export function FeaturedCarousel({ children, count }: { children: React.ReactNod
         onClick={() => go(page + 1)}
         disabled={page >= pages - 1}
         aria-label={t("next")}
-        className={cn(arrow, "-end-5 xl:-end-14")}
+        className={cn(arrow, "-end-5 2xl:-end-14")}
       >
         <ChevronLeft className="size-5 ltr:hidden" aria-hidden />
         <ChevronRight className="size-5 rtl:hidden" aria-hidden />

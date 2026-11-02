@@ -7,13 +7,15 @@ import { Hero } from "@/components/home/hero";
 import { OrganizersCta } from "@/components/home/organizers-cta";
 import { StatsBar } from "@/components/home/stats-bar";
 import { getHomeSections } from "@/features/events/queries";
+import type { Locale } from "@/i18n/routing";
 
 // الصفحة ثابتة وتُحدَّث كل 5 دقائق (الإحصائيات والفعاليات من قاعدة البيانات)
 export const revalidate = 300;
 
-export default async function HomePage() {
+export default async function HomePage({ params }: PageProps<"/[locale]">) {
+  const locale = (await params).locale as Locale;
   const t = await getTranslations("Home");
-  const sections = await getHomeSections();
+  const sections = await getHomeSections(locale);
 
   // "مميزة" أولًا، وإن لم توجد نعرض القادمة في نفس الإطار
   const featured = sections.featured.length > 0 ? sections.featured : sections.upcoming;
@@ -22,7 +24,7 @@ export default async function HomePage() {
     { key: "thisWeek", events: sections.thisWeek, href: "/events?date=this-week" },
     { key: "weekend", events: sections.weekend, href: "/events?date=weekend" },
     { key: "free", events: sections.free, href: "/events?price=free" },
-    { key: "popular", events: sections.popular, href: "/events?sort=popular" },
+    { key: "popular", events: sections.popular, href: "/events" },
   ] as const;
 
   return (

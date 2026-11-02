@@ -43,7 +43,7 @@ export function EventCard({ event, priority = false }: { event: EventCardData; p
   return (
     <article
       className={cn(
-        "group neon-border relative isolate flex aspect-[4/3.1] flex-col justify-between overflow-hidden rounded-3xl text-white sm:aspect-[1.62/1]",
+        "group neon-border relative isolate flex aspect-[4/3.1] flex-col justify-between overflow-hidden rounded-3xl bg-[#0b0620] text-white sm:aspect-[1.62/1]",
         "transition-shadow duration-500 hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--brand-violet)_70%,transparent),0_18px_60px_-12px_var(--glow-strong)]",
       )}
     >
@@ -110,7 +110,10 @@ export function EventCard({ event, priority = false }: { event: EventCardData; p
 
         <div className="mt-2 flex items-center justify-between gap-3">
           {price ? (
-            <span className="text-xl font-bold tracking-tight tabular-nums sm:text-2xl" dir="auto">
+            <span
+              className="rounded-xl bg-black/55 px-2.5 py-0.5 text-xl font-bold tracking-tight tabular-nums backdrop-blur-sm sm:text-2xl"
+              dir="auto"
+            >
               {price}
             </span>
           ) : (

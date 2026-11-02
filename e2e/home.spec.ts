@@ -34,8 +34,9 @@ test.describe("الصفحة الرئيسية", () => {
 
     await expect(page).toHaveURL(/\/ar\/events\?/);
     expect(new URL(page.url()).searchParams.get("q")).toBe("جاز");
-    // لا توجد فعاليات منشورة بعد: حالة فارغة صادقة بدل نتائج وهمية
-    await expect(page.getByText("لا توجد فعاليات مطابقة")).toBeVisible();
+    // لا توجد فعالية بهذا الاسم: حالة فارغة صادقة بدل نتائج وهمية
+    // أثناء الانتقال قد يتزامن المحتوى القديم والجديد للحظة — نتحقق من أول نسخة ظاهرة
+    await expect(page.getByText("لا توجد فعاليات مطابقة").first()).toBeVisible();
   });
 
   test("بلاطات التصنيفات في الـ Hero روابط حقيقية بحالة نشطة", async ({ page }) => {
@@ -44,15 +45,19 @@ test.describe("الصفحة الرئيسية", () => {
     await expect(tiles.getByRole("link", { name: "الكل" })).toHaveAttribute("aria-current", "page");
     await tiles.getByRole("link", { name: "موسيقى" }).click();
     await expect(page).toHaveURL(/\/ar\/events\?category=music$/);
-    await expect(page.getByText("موسيقى", { exact: true })).toBeVisible();
+    // شارة الفلتر النشط
+    await expect(page.getByTestId("active-filters").getByText("موسيقى", { exact: true })).toBeVisible();
   });
 
   test("الفعاليات المميزة وشريط الإحصائيات بلا بيانات وهمية", async ({ page }) => {
     await page.goto("/ar");
-    // لا توجد فعاليات منشورة: حالة فارغة داخل القسم، والشريط يعرض المزايا بدل أرقام صفرية
+    // القسم يعرض بطاقات فعاليات حقيقية من قاعدة البيانات، أو حالة فارغة صادقة إن لم توجد
     const featured = page.getByRole("region", { name: "فعاليات مميزة" });
     await featured.scrollIntoViewIfNeeded();
-    await expect(featured.getByText("لا توجد فعاليات منشورة بعد")).toBeVisible();
+    await expect(
+      featured.locator("article").first().or(featured.getByText("لا توجد فعاليات منشورة بعد")),
+    ).toBeVisible();
+    // الإحصائيات العامة لا تحسب بيانات الاختبار: أقل من 10 فعاليات حقيقية => عرض المزايا بدل الأرقام
     await expect(page.getByTestId("stats-bar")).toHaveAttribute("data-mode", "features");
   });
 
@@ -84,7 +89,7 @@ test.describe("الصفحة الرئيسية", () => {
 
 test.describe("إمكانية الوصول (axe)", () => {
   for (const colorScheme of ["light", "dark"] as const) {
-    for (const path of ["/ar", "/en", "/ar/events", "/en/no-such-page"]) {
+    for (const path of ["/ar", "/en", "/ar/events", "/en/events?price=free", "/en/no-such-page"]) {
       test(`${path} — ${colorScheme}`, async ({ page }) => {
         await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
         await page.goto(path);
