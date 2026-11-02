@@ -64,3 +64,19 @@ export function presetRange(preset: Exclude<DatePreset, "any">, now = new Date()
       return { from: now, to: addDays(today, 31) };
   }
 }
+
+/** "YYYY-MM-DDTHH:mm" (وقت محلي في الكويت من حقل datetime-local) → ISO UTC، أو null إن لم يكن صالحًا */
+export function kuwaitLocalToIso(local: string): string | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(local);
+  if (!match) return null;
+  const [, y, mo, d, h, mi] = match.map(Number);
+  const utc = Date.UTC(y, mo - 1, d, h, mi) - KUWAIT_OFFSET_MS;
+  const check = new Date(utc + KUWAIT_OFFSET_MS);
+  if (check.getUTCMonth() !== mo - 1 || check.getUTCDate() !== d || h > 23 || mi > 59) return null;
+  return new Date(utc).toISOString();
+}
+
+/** ISO → "YYYY-MM-DDTHH:mm" بتوقيت الكويت (لتعبئة حقل datetime-local) */
+export function isoToKuwaitLocal(iso: string): string {
+  return new Date(new Date(iso).getTime() + KUWAIT_OFFSET_MS).toISOString().slice(0, 16);
+}

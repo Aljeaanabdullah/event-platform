@@ -30,6 +30,18 @@
 - الدالتان `SECURITY DEFINER` للقراءة فقط، وتُرجعان **فقط** فعاليات `published` (والملغاة في صفحة التفاصيل) لجهات `approved`.
 - `p_include_test`: تمرّره الواجهة `true` فقط عند `SHOW_TEST_DATA=1` وخارج Production.
 
+## أدوات المنظّم ومسار المراجعة (Phase 6)
+
+- `get_organizer_dashboard(org)` و`get_organizer_event_sales(org)`: أرقام فعلية من `orders`/`tickets`/`ticket_types`.
+  ترفض (`FORBIDDEN`) أي مستخدم ليس owner/manager في الجهة (أو مديرًا) — الماسح `scanner` لا يرى المبيعات.
+- إنشاء/تعديل الفعالية والتذاكر يتم عبر RLS مباشرة: مسودات/مرفوضة الجهة فقط، وصلاحيات الأعمدة تمنع
+  `status` و`is_featured` و`quantity_sold/reserved`. حذف نوع تذكرة عليه حجوزات ممنوع.
+- `submit_event_for_review`: نفس الشروط السابقة + إشعار لكل مدير. `review_event`: + إشعار للمنظّم بالنتيجة.
+- كل تغيير حالة يُسجَّل في `audit_logs` تلقائيًا (Trigger)، والسجل غير قابل للتعديل أو الحذف.
+- الصور: رفع مباشر من المتصفح إلى `event-media/{organizer_id}/events/{uuid}.{ext}`؛ سياسة الحاوية تسمح لأعضاء الجهة فقط،
+  والخادم يرفض أي مسار خارج مجلد الجهة.
+- **الحد الأقصى للحضور** = مجموع كميات أنواع التذاكر (يُعرض في المعالج). عمود مستقل لم يُطبَّق — انظر BLOCKERS.
+
 ## بيانات الاختبار المعزولة
 
 - [`supabase/seed/test-data.sql`](../supabase/seed/test-data.sql): جهتان `is_test`، 8 فعاليات (منشورة/مكتملة/قيد المراجعة/مسودة)،

@@ -4,6 +4,8 @@ import {
   kuwaitDateString,
   kuwaitDayRange,
   kuwaitStartOfDay,
+  isoToKuwaitLocal,
+  kuwaitLocalToIso,
   kuwaitWeekday,
   presetRange,
 } from "./kuwait-time";
@@ -59,5 +61,18 @@ describe("توقيت الكويت", () => {
     const r = presetRange("tomorrow", tuesdayNight);
     expect(r.from.toISOString()).toBe("2026-11-03T21:00:00.000Z");
     expect(r.to.toISOString()).toBe("2026-11-04T21:00:00.000Z");
+  });
+});
+
+describe("تحويل الوقت المحلي للكويت", () => {
+  it("datetime-local → ISO والعكس", () => {
+    expect(kuwaitLocalToIso("2026-12-01T19:30")).toBe("2026-12-01T16:30:00.000Z");
+    expect(kuwaitLocalToIso("2026-12-01T01:00")).toBe("2026-11-30T22:00:00.000Z");
+    expect(isoToKuwaitLocal("2026-12-01T16:30:00.000Z")).toBe("2026-12-01T19:30");
+  });
+  it("يرفض القيم غير الصالحة", () => {
+    expect(kuwaitLocalToIso("2026-02-30T10:00")).toBeNull();
+    expect(kuwaitLocalToIso("2026-12-01 19:30")).toBeNull();
+    expect(kuwaitLocalToIso("2026-12-01T25:00")).toBeNull();
   });
 });
