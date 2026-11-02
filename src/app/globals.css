@@ -15,6 +15,9 @@
   /* ألوان الهوية */
   --color-brand-violet: var(--brand-violet);
   --color-brand-blue: var(--brand-blue);
+  --color-brand-pink: var(--brand-pink);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
   --color-surface-elevated: var(--surface-elevated);
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -63,8 +66,9 @@
 :root {
   --brand-violet: oklch(0.541 0.247 293);
   --brand-blue: oklch(0.58 0.21 258);
+  --brand-pink: oklch(0.6 0.25 335);
 
-  --background: oklch(0.975 0.004 270);
+  --background: oklch(0.972 0.012 290);
   --foreground: oklch(0.21 0.045 268);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.21 0.045 268);
@@ -100,20 +104,46 @@
   --sidebar-border: oklch(0.905 0.012 270);
   --sidebar-ring: var(--brand-violet);
 
-  --hero-glow-1: oklch(0.541 0.247 293 / 0.18);
-  --hero-glow-2: oklch(0.58 0.21 258 / 0.14);
+  --hero-glow-1: oklch(0.62 0.22 300 / 0.22);
+  --hero-glow-2: oklch(0.65 0.18 255 / 0.18);
   --gradient-text-from: oklch(0.5 0.25 293);
   --gradient-text-to: oklch(0.52 0.21 258);
+  --neon-from: oklch(0.5 0.26 293);
+  --neon-to: oklch(0.55 0.25 335);
+
+  /* زجاج وتوهج */
+  --glass: oklch(1 0 0 / 0.72);
+  --glass-border: oklch(0.55 0.15 293 / 0.18);
+  --glow: oklch(0.6 0.24 293 / 0.28);
+  --glow-strong: oklch(0.6 0.25 293 / 0.45);
+  --page-glow-1: oklch(0.78 0.12 300 / 0.55);
+  --page-glow-2: oklch(0.82 0.1 250 / 0.45);
+
+  /* أفق الكويت (الوضع الفاتح: غروب وردي هادئ) */
+  --sky-top: oklch(0.95 0.03 300);
+  --sky-mid: oklch(0.86 0.08 320);
+  --sky-horizon: oklch(0.8 0.12 345);
+  --sky-water: oklch(0.88 0.06 290);
+  --sky-sun: oklch(0.9 0.12 60);
+  --sky-building: oklch(0.42 0.08 290);
+  --sky-building-top: oklch(0.55 0.1 300);
+  --sky-tower-light: oklch(0.7 0.08 280);
+  --sky-sphere: oklch(0.45 0.12 260);
+  --sky-sphere-light: oklch(0.75 0.12 230);
+  --sky-disc: oklch(0.85 0.1 220);
+  --sky-window: oklch(0.95 0.08 85);
+  --sky-edge: oklch(0.65 0.2 330);
 }
 
 /* ===== الوضع الداكن: كحلي داكن جدًا، بطاقات مرتفعة قليلًا، بنفسجي وأزرق كهربائي ===== */
 .dark {
-  --brand-violet: oklch(0.541 0.247 293);
+  --brand-violet: oklch(0.58 0.25 293);
   --brand-blue: oklch(0.66 0.19 250);
+  --brand-pink: oklch(0.7 0.24 330);
 
-  --background: oklch(0.155 0.03 268);
-  --foreground: oklch(0.965 0.01 270);
-  --card: oklch(0.2 0.035 268);
+  --background: oklch(0.135 0.045 285);
+  --foreground: oklch(0.97 0.01 290);
+  --card: oklch(0.19 0.055 288);
   --card-foreground: oklch(0.965 0.01 270);
   --surface-elevated: oklch(0.235 0.038 268);
   --popover: oklch(0.215 0.037 268);
@@ -146,10 +176,33 @@
   --sidebar-border: oklch(1 0 0 / 9%);
   --sidebar-ring: oklch(0.65 0.2 293);
 
-  --hero-glow-1: oklch(0.541 0.247 293 / 0.35);
-  --hero-glow-2: oklch(0.66 0.19 250 / 0.25);
+  --hero-glow-1: oklch(0.55 0.26 300 / 0.45);
+  --hero-glow-2: oklch(0.62 0.2 255 / 0.3);
   --gradient-text-from: oklch(0.75 0.17 293);
   --gradient-text-to: oklch(0.78 0.14 240);
+  --neon-from: oklch(0.72 0.2 300);
+  --neon-to: oklch(0.74 0.22 330);
+
+  --glass: oklch(0.2 0.06 288 / 0.55);
+  --glass-border: oklch(0.75 0.15 300 / 0.16);
+  --glow: oklch(0.58 0.27 295 / 0.45);
+  --glow-strong: oklch(0.62 0.28 295 / 0.7);
+  --page-glow-1: oklch(0.42 0.25 300 / 0.5);
+  --page-glow-2: oklch(0.45 0.2 260 / 0.35);
+
+  --sky-top: oklch(0.2 0.08 290);
+  --sky-mid: oklch(0.35 0.16 305);
+  --sky-horizon: oklch(0.55 0.2 340);
+  --sky-water: oklch(0.18 0.07 285);
+  --sky-sun: oklch(0.68 0.2 330);
+  --sky-building: oklch(0.13 0.04 285);
+  --sky-building-top: oklch(0.22 0.07 295);
+  --sky-tower-light: oklch(0.38 0.1 290);
+  --sky-sphere: oklch(0.2 0.08 270);
+  --sky-sphere-light: oklch(0.55 0.16 240);
+  --sky-disc: oklch(0.72 0.15 220);
+  --sky-window: oklch(0.88 0.12 80);
+  --sky-edge: oklch(0.72 0.2 320);
 }
 
 @layer base {
@@ -193,6 +246,39 @@
   .bg-gradient-brand {
     background-image: linear-gradient(135deg, var(--brand-violet), var(--brand-blue));
   }
+  /* تدرج العنوان الثاني (بنفسجي → وردي) كما في المرجع */
+  .text-gradient-neon {
+    background-image: linear-gradient(to var(--gradient-direction, right), var(--neon-from), var(--neon-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  [dir="rtl"] .text-gradient-neon {
+    --gradient-direction: left;
+  }
+  /* سطح زجاجي: خلفية شفافة + ضبابية + حد خفيف + لمعة علوية */
+  .glass {
+    background-color: var(--glass);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 0.06);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+  /* حد نيون متوهج (للعناصر النشطة والبطاقات) */
+  .neon-border {
+    border: 1px solid color-mix(in oklch, var(--brand-violet) 55%, transparent);
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--brand-violet) 15%, transparent),
+      0 0 24px -4px var(--glow),
+      inset 0 0 18px -8px var(--glow);
+  }
+  /* خلفية الصفحة: توهجات ثابتة خلف كل المحتوى */
+  .page-backdrop {
+    background-image:
+      radial-gradient(55% 40% at 85% 0%, var(--page-glow-1), transparent 70%),
+      radial-gradient(45% 35% at 0% 35%, var(--page-glow-2), transparent 70%),
+      radial-gradient(60% 40% at 50% 100%, var(--page-glow-1), transparent 75%);
+  }
   .hero-glow {
     background-image:
       radial-gradient(60% 50% at 20% 10%, var(--hero-glow-1), transparent 70%),
@@ -205,6 +291,62 @@
     background-size: 48px 48px;
     mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
   }
+}
+
+/* ألوان رسم أفق الكويت (SVG) — تُربط بمتغيرات الثيم عبر أصناف CSS
+   (متغيرات CSS غير المستخدمة في ملفات CSS تُحذف عند البناء، لذلك لا نستخدمها كـ style مباشر) */
+.ks-fill-disc {
+  fill: var(--sky-disc);
+}
+.ks-fill-edge {
+  fill: var(--sky-edge);
+}
+.ks-fill-window {
+  fill: var(--sky-window);
+}
+.ks-stop-building {
+  stop-color: var(--sky-building);
+}
+.ks-stop-building-top {
+  stop-color: var(--sky-building-top);
+}
+.ks-stop-horizon {
+  stop-color: var(--sky-horizon);
+}
+.ks-stop-mid {
+  stop-color: var(--sky-mid);
+}
+.ks-stop-sphere {
+  stop-color: var(--sky-sphere);
+}
+.ks-stop-sphere-light {
+  stop-color: var(--sky-sphere-light);
+}
+.ks-stop-sun {
+  stop-color: var(--sky-sun);
+}
+.ks-stop-top {
+  stop-color: var(--sky-top);
+}
+.ks-stop-tower-light {
+  stop-color: var(--sky-tower-light);
+}
+.ks-stop-water {
+  stop-color: var(--sky-water);
+}
+.ks-stroke-edge {
+  stroke: var(--sky-edge);
+}
+
+/* أدوات قابلة للاستخدام مع المتغيرات (dark: / hover:) */
+@utility bg-gradient-neon {
+  background-image: linear-gradient(135deg, var(--brand-violet), var(--brand-pink));
+}
+@utility glow-primary {
+  box-shadow: 0 8px 28px -6px var(--glow-strong);
+}
+@utility glow-soft {
+  box-shadow: 0 0 40px -10px var(--glow);
 }
 
 @keyframes drift {

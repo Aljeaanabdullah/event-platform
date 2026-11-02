@@ -27,7 +27,9 @@ export async function SiteFooter() {
   ];
 
   return (
-    <footer className="mt-24 border-t bg-card/50">
+    <footer className="glass relative mt-16 rounded-none border-x-0 border-b-0">
+      {/* خط نيون علوي */}
+      <div aria-hidden className="absolute inset-x-0 -top-px h-px bg-gradient-neon opacity-60" />
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
         <div className="space-y-4 md:col-span-2">
           <Logo />
@@ -51,7 +53,7 @@ export async function SiteFooter() {
           </nav>
         ))}
       </div>
-      <Separator />
+      <Separator className="bg-[var(--glass-border)]" />
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
         <p>{t("rights", { year: new Date().getFullYear() })}</p>
         <div className="flex items-center gap-2">

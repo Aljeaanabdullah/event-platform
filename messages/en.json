@@ -44,9 +44,9 @@
     "titleStart": "Discover",
     "titleHighlight": "unforgettable",
     "titleEnd": "experiences near you",
-    "subtitle": "Conferences, workshops, concerts, exhibitions and family outings — search and book your ticket in minutes.",
+    "subtitle": "One platform for events in Kuwait — entertainment, culture, sports and business, all in one place.",
     "searchLabel": "Search by name",
-    "searchPlaceholder": "Event name or venue",
+    "searchPlaceholder": "Search for an event, organizer or venue…",
     "areaLabel": "Area",
     "anyArea": "All areas",
     "dateLabel": "Date",
@@ -54,8 +54,12 @@
     "anyCategory": "All categories",
     "submit": "Search",
     "searchFormLabel": "Search events",
-    "ticketTitle": "Admit One",
-    "ticketSubtitle": "Kuwait · Events"
+    "ticketTitle": "ADMIT ONE",
+    "ticketSubtitle": "Kuwait · Events",
+    "titleLine1": "Discover Kuwait's events",
+    "titleLine2": "and book your seat now",
+    "allCategories": "All",
+    "categoriesLabel": "Browse by category"
   },
   "DatePresets": {
     "any": "Any time",
@@ -90,7 +94,7 @@
   "Home": {
     "featured": {
       "title": "Featured events",
-      "subtitle": "Hand-picked by our team this season"
+      "subtitle": "The latest and most in-demand events in Kuwait"
     },
     "thisWeek": {
       "title": "This week",
@@ -129,6 +133,12 @@
       "point3": "QR ticket check-in at the door",
       "point4": "Sales reports and payout tracking",
       "cta": "Become an organizer"
+    },
+    "viewAllEvents": "View all events",
+    "carousel": {
+      "previous": "Previous",
+      "next": "Next",
+      "goTo": "Go to set {n}"
     }
   },
   "EventCard": {
@@ -140,7 +150,11 @@
       "cancelled": "Cancelled",
       "ended": "Ended"
     },
-    "byOrganizer": "By {name}"
+    "byOrganizer": "By {name}",
+    "bookNow": "Book now",
+    "addFavorite": "Add to favorites",
+    "removeFavorite": "Remove from favorites",
+    "favoriteError": "Couldn't update favorites, please try again"
   },
   "Events": {
     "title": "Events",
@@ -185,7 +199,8 @@
     "sampleSuccess": "Saved successfully",
     "sampleError": "Couldn't complete the action",
     "sampleInfo": "This is sample data for display only",
-    "buttons": "Buttons"
+    "buttons": "Buttons",
+    "homePreviewBanner": "Development preview with sample data — not real events and never shown in production."
   },
   "Auth": {
     "layout": {
@@ -286,7 +301,8 @@
     "organizer": "Organizer dashboard",
     "becomeOrganizer": "Become an organizer",
     "admin": "Admin dashboard",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "greeting": "Hi, {name}"
   },
   "Account": {
     "title": "My account",
@@ -382,5 +398,37 @@
       "publishedEvents": "Published events"
     },
     "comingSoon": "Review tools and financial reports are added in Phase 9."
+  },
+  "CategoriesShort": {
+    "conferences": "Conferences",
+    "workshops": "Workshops",
+    "tech-ai": "Tech",
+    "business": "Business",
+    "exhibitions": "Exhibitions",
+    "entertainment": "Fun",
+    "theater": "Theater",
+    "music": "Music",
+    "sports": "Sports",
+    "family": "Family",
+    "education": "Education",
+    "outdoor": "Outdoor"
+  },
+  "Notifications": {
+    "label": "Notifications",
+    "labelUnread": "Notifications ({count} unread)",
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications yet"
+  },
+  "Stats": {
+    "label": "About the platform",
+    "slogan": "Kuwait's go-to platform for events",
+    "events": "Published events",
+    "users": "Registered users",
+    "organizers": "Event organizers",
+    "tickets": "Tickets booked",
+    "featurePayments": "Secure KNET & card payments",
+    "featureTickets": "Instant QR tickets on your phone",
+    "featureBilingual": "Full Arabic & English experience"
   }
 }

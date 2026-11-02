@@ -1,56 +1,53 @@
-import { Plus, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { localeDirection } from "@/i18n/routing";
 
-import { LocaleSwitcher } from "./locale-switcher";
+import { LocaleToggle } from "./locale-toggle";
 import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
-import { mainNav, routes } from "./nav-links";
-import { ThemeToggle } from "./theme-toggle";
+import { NavMenu } from "./nav-menu";
+import { NotificationsBell } from "./notifications-bell";
+import { ThemeSwitch } from "./theme-switch";
 import { UserMenu } from "./user-menu";
 
+/**
+ * الـ Header بنمط المرجع: شريط شفاف ثابت، الشعار في جهة البداية، التنقل،
+ * ثم "كبسولات" زجاجية: البحث، الثيم، اللغة، الإشعارات، المستخدم.
+ */
 export async function SiteHeader() {
   const t = await getTranslations("Nav");
   const locale = await getLocale();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/75 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/90 via-background/60 to-transparent [mask-image:linear-gradient(to_bottom,black_70%,transparent)] backdrop-blur-md" />
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
         <MobileNav dir={localeDirection[locale]} />
 
-        <Link href="/" aria-label={t("homeLink")} className="me-4 rounded-lg">
+        <Link href="/" aria-label={t("homeLink")} className="me-2 shrink-0 rounded-lg lg:me-6">
           <Logo />
         </Link>
 
-        <nav aria-label={t("mainNavigation")} className="hidden items-center gap-1 md:flex">
-          {mainNav.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-            >
-              {t(item.key)}
-            </Link>
-          ))}
-        </nav>
+        <NavMenu />
 
-        <div className="ms-auto flex items-center gap-1">
-          <Button asChild variant="ghost" size="icon" aria-label={t("search")}>
+        <div className="ms-auto flex items-center gap-2">
+          <Button
+            asChild
+            variant="ghost"
+            size="icon"
+            className="glass size-10 rounded-full"
+            aria-label={t("search")}
+          >
             <Link href="/events">
-              <Search className="size-5" aria-hidden />
+              <Search className="size-[18px]" aria-hidden />
             </Link>
           </Button>
-          <LocaleSwitcher className="hidden sm:inline-flex" />
-          <ThemeToggle />
-          <Button asChild className="hidden md:inline-flex">
-            <Link href={routes.addEvent}>
-              <Plus aria-hidden />
-              {t("addEvent")}
-            </Link>
-          </Button>
+          <ThemeSwitch className="hidden sm:flex" />
+          <LocaleToggle className="hidden sm:flex" />
+          <NotificationsBell />
           <UserMenu />
         </div>
       </div>

@@ -10,9 +10,10 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Link } from "@/i18n/navigation";
 import { useSession } from "@/components/providers/session-provider";
 
-import { LocaleSwitcher } from "./locale-switcher";
+import { LocaleToggle } from "./locale-toggle";
 import { Logo } from "./logo";
 import { mainNav, routes } from "./nav-links";
+import { ThemeSwitch } from "./theme-switch";
 
 export function MobileNav({ dir }: { dir: "rtl" | "ltr" }) {
   const t = useTranslations("Nav");
@@ -24,7 +25,12 @@ export function MobileNav({ dir }: { dir: "rtl" | "ltr" }) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden" aria-label={t("openMenu")}>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="glass size-10 rounded-full lg:hidden"
+          aria-label={t("openMenu")}
+        >
           <Menu className="size-5" aria-hidden />
         </Button>
       </SheetTrigger>
@@ -55,7 +61,7 @@ export function MobileNav({ dir }: { dir: "rtl" | "ltr" }) {
         </nav>
         <Separator className="my-2" />
         <div className="flex flex-col gap-2 px-4">
-          <Button asChild>
+          <Button asChild className="bg-gradient-neon text-white">
             <Link href={routes.addEvent} onClick={close}>
               <Plus aria-hidden />
               {t("addEvent")}
@@ -74,7 +80,10 @@ export function MobileNav({ dir }: { dir: "rtl" | "ltr" }) {
               </Link>
             </Button>
           )}
-          <LocaleSwitcher showLabel className="justify-start" />
+          <div className="mt-2 flex items-center justify-between gap-3">
+            <ThemeSwitch />
+            <LocaleToggle />
+          </div>
         </div>
       </SheetContent>
     </Sheet>

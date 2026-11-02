@@ -41,8 +41,14 @@ test.describe("الثيم", () => {
 
     test("زر تغيير الثيم يعمل ويُحفظ الاختيار بعد إعادة التحميل", async ({ page }) => {
       await page.goto("/ar");
-      await page.getByRole("banner").getByTestId("theme-toggle").click();
-      await page.getByTestId("theme-dark").click();
+      // على الجوال مبدّل الثيم داخل القائمة الجانبية
+      const isMobile = (page.viewportSize()?.width ?? 1280) < 640;
+      if (isMobile) {
+        await page.getByRole("button", { name: "فتح القائمة" }).click();
+        await page.getByRole("dialog").getByTestId("theme-dark").click();
+      } else {
+        await page.getByRole("banner").getByTestId("theme-dark").click();
+      }
       await expect(page.locator("html")).toHaveClass(/dark/);
 
       await page.reload();
