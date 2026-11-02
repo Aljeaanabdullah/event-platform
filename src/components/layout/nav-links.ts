@@ -7,5 +7,6 @@ export const mainNav = [
 
 export const routes = {
   login: "/login",
-  addEvent: "/organizer/events/new",
+  addEvent: "/organizer",
+  account: "/account",
 } as const;

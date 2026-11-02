@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "@/i18n/navigation";
+import { useSession } from "@/components/providers/session-provider";
 
 import { LocaleSwitcher } from "./locale-switcher";
 import { Logo } from "./logo";
@@ -16,6 +17,8 @@ import { mainNav, routes } from "./nav-links";
 export function MobileNav({ dir }: { dir: "rtl" | "ltr" }) {
   const t = useTranslations("Nav");
   const [open, setOpen] = useState(false);
+  const session = useSession();
+  const tMenu = useTranslations("UserMenu");
   const close = () => setOpen(false);
 
   return (
@@ -58,11 +61,19 @@ export function MobileNav({ dir }: { dir: "rtl" | "ltr" }) {
               {t("addEvent")}
             </Link>
           </Button>
-          <Button asChild variant="outline">
-            <Link href={routes.login} onClick={close}>
-              {t("login")}
-            </Link>
-          </Button>
+          {session.status === "authenticated" ? (
+            <Button asChild variant="outline">
+              <Link href={routes.account} onClick={close}>
+                {tMenu("account")}
+              </Link>
+            </Button>
+          ) : (
+            <Button asChild variant="outline">
+              <Link href={routes.login} onClick={close}>
+                {t("login")}
+              </Link>
+            </Button>
+          )}
           <LocaleSwitcher showLabel className="justify-start" />
         </div>
       </SheetContent>

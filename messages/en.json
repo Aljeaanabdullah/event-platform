@@ -11,7 +11,8 @@
     "backHome": "Back to home",
     "viewAll": "View all",
     "browseEvents": "Browse events",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "optional": "Optional"
   },
   "Nav": {
     "skipToContent": "Skip to content",
@@ -185,5 +186,201 @@
     "sampleError": "Couldn't complete the action",
     "sampleInfo": "This is sample data for display only",
     "buttons": "Buttons"
+  },
+  "Auth": {
+    "layout": {
+      "tagline": "Your ticket to Kuwait's best experiences",
+      "benefit1": "Book in minutes with secure payment",
+      "benefit2": "All your tickets and QR codes in one place",
+      "benefit3": "Save favorite events and stay updated"
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to manage your bookings and tickets",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "forgot": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "register": "Create one",
+      "orContinue": "or",
+      "google": "Continue with Google",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Join for free and discover the best events",
+      "fullName": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "passwordHint": "At least 8 characters, including a letter and a number",
+      "accountType": "Account type",
+      "customer": "Attendee",
+      "customerHint": "I want to discover events and book tickets",
+      "organizer": "Event organizer",
+      "organizerHint": "I want to publish events and sell tickets (after review)",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "login": "Sign in",
+      "terms": "By creating an account, you agree to the Terms of Use and Privacy Policy.",
+      "checkEmailTitle": "Check your email",
+      "checkEmailBody": "We sent an activation link to {email}. Open it to finish creating your account.",
+      "backToLogin": "Back to sign in"
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a link to set a new password",
+      "email": "Email",
+      "submit": "Send reset link",
+      "sentTitle": "Check your email",
+      "sentBody": "If an account exists for this email, you'll receive a message within minutes.",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "Set a new password",
+      "subtitle": "Choose a strong password you haven't used before",
+      "password": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Save password",
+      "success": "Your password has been updated",
+      "expiredTitle": "This link has expired",
+      "expiredBody": "The reset link is invalid or has expired. Request a new one.",
+      "requestNew": "Request a new link"
+    }
+  },
+  "Validation": {
+    "required": "This field is required",
+    "emailInvalid": "Enter a valid email address",
+    "passwordTooShort": "Password must be at least {min} characters",
+    "passwordTooLong": "Password is too long",
+    "passwordNeedsLetter": "Password must include at least one letter",
+    "passwordNeedsNumber": "Password must include at least one number",
+    "passwordMismatch": "Passwords don't match",
+    "nameTooShort": "Name is too short",
+    "nameTooLong": "Name is too long",
+    "phoneInvalid": "Phone number is not valid",
+    "slugInvalid": "Use lowercase English letters, numbers and hyphens only (3–60 characters)",
+    "urlInvalid": "Enter a valid URL starting with https://",
+    "tooLong": "Text is too long"
+  },
+  "AuthErrors": {
+    "invalidCredentials": "Incorrect email or password",
+    "emailNotConfirmed": "Please activate your account using the link sent to your email first",
+    "weakPassword": "Password is too weak, choose a stronger one",
+    "samePassword": "New password must be different from the current one",
+    "rateLimited": "Too many attempts. Please wait a moment and try again",
+    "sessionExpired": "Your session has expired. Please sign in again",
+    "signupDisabled": "Sign-ups are currently unavailable",
+    "providerDisabled": "Google sign-in is not enabled yet",
+    "invalidInput": "Please check the information you entered",
+    "generic": "Something went wrong. Please try again",
+    "callback": "We couldn't complete sign-in. Please try again",
+    "slugTaken": "This handle is already taken, choose another",
+    "tooManyPending": "You already have applications under review"
+  },
+  "UserMenu": {
+    "label": "Account menu",
+    "account": "My account",
+    "organizer": "Organizer dashboard",
+    "becomeOrganizer": "Become an organizer",
+    "admin": "Admin dashboard",
+    "signOut": "Sign out"
+  },
+  "Account": {
+    "title": "My account",
+    "subtitle": "Manage your profile and security settings",
+    "memberSince": "Member since {date}",
+    "nav": {
+      "profile": "Profile",
+      "organizer": "Organizer",
+      "admin": "Admin"
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "This information is used for your bookings and tickets",
+      "fullName": "Full name",
+      "email": "Email",
+      "emailHint": "Email can't be changed here yet",
+      "phone": "Phone number",
+      "phoneHint": "Optional — e.g. +965 5000 0000",
+      "language": "Email language",
+      "save": "Save changes",
+      "saved": "Changes saved"
+    },
+    "role": {
+      "title": "Account type",
+      "customer": "Attendee",
+      "organizer": "Approved organizer",
+      "organizerPending": "Organizer application under review",
+      "admin": "Platform admin"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Password and active sessions",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "changePassword": "Change password",
+      "passwordChanged": "Password changed",
+      "googleOnly": "You sign in with Google. You can also set a password to sign in with email.",
+      "signOut": "Sign out",
+      "signOutAll": "Sign out of all devices",
+      "signOutAllHint": "Ends your sessions on every browser and device"
+    },
+    "organizerCta": {
+      "title": "Do you organize events?",
+      "body": "Apply as an organizer to publish events and sell tickets after review.",
+      "button": "Apply now"
+    }
+  },
+  "Organizer": {
+    "title": "Organizer",
+    "subtitle": "Your applications and organizations",
+    "emptyTitle": "You're not an organizer yet",
+    "emptyBody": "Submit an application and our team will usually review it within two business days.",
+    "apply": "Apply as an organizer",
+    "applyAnother": "Register another organization",
+    "dashboardSoon": "Event creation and sales tools are coming in the next phase.",
+    "rejectionReason": "Reason: {reason}",
+    "status": {
+      "pending": "Under review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "suspended": "Suspended"
+    },
+    "memberRole": {
+      "owner": "Owner",
+      "manager": "Manager",
+      "scanner": "Gate scanner"
+    },
+    "applyForm": {
+      "title": "Apply as an organizer",
+      "subtitle": "Tell us about your organization. We'll review it and let you know.",
+      "nameAr": "Organization name (Arabic)",
+      "nameEn": "Organization name (English)",
+      "slug": "URL handle",
+      "slugHint": "Appears in your page link: /organizers/your-name",
+      "contactEmail": "Contact email",
+      "contactPhone": "Contact phone",
+      "website": "Website",
+      "commercialRegNo": "Commercial registration no.",
+      "descriptionAr": "About (Arabic)",
+      "descriptionEn": "About (English)",
+      "submit": "Submit application",
+      "success": "Your application was submitted and is under review",
+      "reviewNote": "You won't be able to publish events until the platform team approves your application."
+    }
+  },
+  "Admin": {
+    "title": "Admin dashboard",
+    "subtitle": "Platform overview (live data from the database)",
+    "stats": {
+      "users": "Users",
+      "pendingOrganizers": "Pending organizer applications",
+      "pendingEvents": "Events awaiting review",
+      "publishedEvents": "Published events"
+    },
+    "comingSoon": "Review tools and financial reports are added in Phase 9."
   }
 }

@@ -7,6 +7,8 @@ import { DirectionProvider } from "@/components/ui/direction";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
+import { SessionProvider } from "./session-provider";
+
 type Props = {
   children: React.ReactNode;
   dir: "rtl" | "ltr";
@@ -30,7 +32,7 @@ export function AppProviders({ children, dir }: Props) {
       <DirectionProvider dir={dir}>
         <MotionConfig reducedMotion="user">
           <TooltipProvider delayDuration={300}>
-            {children}
+            <SessionProvider>{children}</SessionProvider>
             <Toaster position={dir === "rtl" ? "bottom-left" : "bottom-right"} dir={dir} richColors />
           </TooltipProvider>
         </MotionConfig>

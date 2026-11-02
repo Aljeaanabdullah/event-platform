@@ -7,7 +7,7 @@
 --   * في النهاية ترفع استثناء يحتوي ملخص النتائج => يتم التراجع عن كل شيء تلقائيًا
 --     (لا يبقى أي أثر في قاعدة البيانات).
 -- التشغيل: نفّذ الملف كاملًا عبر SQL Editor أو أداة execute_sql.
--- النتيجة المتوقعة: رسالة تبدأ بـ "TEST_SUMMARY passed=N failed=0".
+-- النتيجة المتوقعة: "TEST_SUMMARY passed=59 failed=0".
 -- =====================================================================
 do $test$
 declare
@@ -481,6 +481,15 @@ begin
   if public.storage_path_organizer(v_org::text || '/events/cover.webp') = v_org
      and public.storage_path_organizer('../etc/passwd') is null then
     passed := passed + 1; else failures := failures || 'T52 storage path'; end if;
+
+  -- T53: حذف مستخدم له سجلات تدقيق ينجح، وتبقى سجلاته كما هي (Migration 7)
+  select count(*) into v_n from public.audit_logs where actor_id = u_admin;
+  begin
+    delete from auth.users where id = u_admin;
+    if v_n > 0 and (select count(*) from public.audit_logs where actor_id = u_admin) = v_n then
+      passed := passed + 1; else failures := failures || ('T53 audit rows=' || v_n); end if;
+  exception when others then failures := failures || ('T53 user delete failed: ' || sqlerrm);
+  end;
 
   -- ===== النتيجة (الاستثناء يُلغي كل التغييرات) =====
   raise exception 'TEST_SUMMARY passed=% failed=% %', passed, coalesce(array_length(failures, 1), 0), array_to_string(failures, ' | ');

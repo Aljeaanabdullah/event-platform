@@ -10,6 +10,7 @@ import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
 import { mainNav, routes } from "./nav-links";
 import { ThemeToggle } from "./theme-toggle";
+import { UserMenu } from "./user-menu";
 
 export async function SiteHeader() {
   const t = await getTranslations("Nav");
@@ -44,15 +45,13 @@ export async function SiteHeader() {
           </Button>
           <LocaleSwitcher className="hidden sm:inline-flex" />
           <ThemeToggle />
-          <Button asChild variant="ghost" className="hidden md:inline-flex">
-            <Link href={routes.login}>{t("login")}</Link>
-          </Button>
           <Button asChild className="hidden md:inline-flex">
             <Link href={routes.addEvent}>
               <Plus aria-hidden />
               {t("addEvent")}
             </Link>
           </Button>
+          <UserMenu />
         </div>
       </div>
     </header>
