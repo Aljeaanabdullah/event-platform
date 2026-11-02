@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, ChevronDown, LogOut, ShieldCheck, User } from "lucide-react";
+import { Briefcase, ChevronDown, LogOut, ShieldCheck, User, Receipt, Ticket } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { useSession } from "@/components/providers/session-provider";
@@ -114,6 +114,18 @@ export function UserMenu() {
           <Link href={routes.account}>
             <User aria-hidden />
             {t("account")}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/account/tickets">
+            <Ticket aria-hidden />
+            {t("tickets")}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/account/orders">
+            <Receipt aria-hidden />
+            {t("orders")}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>

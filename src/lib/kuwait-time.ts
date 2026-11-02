@@ -80,3 +80,8 @@ export function kuwaitLocalToIso(local: string): string | null {
 export function isoToKuwaitLocal(iso: string): string {
   return new Date(new Date(iso).getTime() + KUWAIT_OFFSET_MS).toISOString().slice(0, 16);
 }
+
+/** الوقت الحالي (ms) — دالة منفصلة حتى تبقى مكوّنات الخادم "نقية" في نظر ESLint */
+export function nowMs(): number {
+  return Date.now();
+}

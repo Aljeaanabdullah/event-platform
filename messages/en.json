@@ -334,7 +334,9 @@
     "becomeOrganizer": "Become an organizer",
     "admin": "Admin dashboard",
     "signOut": "Sign out",
-    "greeting": "Hi, {name}"
+    "greeting": "Hi, {name}",
+    "tickets": "My tickets",
+    "orders": "My orders"
   },
   "Account": {
     "title": "My account",
@@ -380,7 +382,10 @@
       "title": "Do you organize events?",
       "body": "Apply as an organizer to publish events and sell tickets after review.",
       "button": "Apply now"
-    }
+    },
+    "quickLinks": "Quick links",
+    "myTickets": "My tickets",
+    "myOrders": "My orders"
   },
   "Organizer": {
     "title": "Organizer",
@@ -685,6 +690,113 @@
       "notFound": "This item is no longer awaiting review",
       "invalidInput": "Invalid input",
       "generic": "Something went wrong — please try again"
+    }
+  },
+  "Booking": {
+    "book": "Book now",
+    "reserving": "Reserving…",
+    "estimate": "Estimated total",
+    "holdNote": "Tickets are held for you for 15 minutes to complete payment. The final amount is calculated on the server.",
+    "quantityFor": "{name} quantity",
+    "increase": "Increase {name}",
+    "decrease": "Decrease {name}",
+    "errors": {
+      "authRequired": "Please sign in first",
+      "invalidItems": "Invalid selection",
+      "eventNotOnSale": "This event isn't available for booking",
+      "tooManyPending": "You have too many pending bookings. Pay for or cancel them first",
+      "ticketNotOnSale": "This ticket type isn't on sale right now",
+      "invalidQuantity": "Quantity is outside the allowed range per order",
+      "soldOut": "Sorry, the requested quantity is no longer available",
+      "generic": "Couldn't complete the booking — please try again"
+    }
+  },
+  "Checkout": {
+    "title": "Complete your booking",
+    "subtitle": "Review your order before paying",
+    "holdLeft": "Your tickets are held for {time}",
+    "holdExpired": "The hold has expired — tickets may be released",
+    "paymentTitle": "Payment",
+    "paymentPending": "Sandbox online payment is enabled in the next phase.",
+    "cancel": "Cancel booking",
+    "cancelled": "Booking cancelled and tickets released",
+    "cancelFailed": "Couldn't cancel"
+  },
+  "Orders": {
+    "title": "My orders",
+    "subtitle": "All your bookings and their payment status",
+    "emptyTitle": "No orders yet",
+    "emptyBody": "Book your first ticket from the events page.",
+    "browse": "Browse events",
+    "detailTitle": "Order details",
+    "orderNumber": "Order number",
+    "items": "Order items",
+    "subtotal": "Subtotal",
+    "serviceFee": "Service fee",
+    "total": "Total",
+    "confirmed": "Your booking is confirmed! Your tickets are below.",
+    "needsRefund": "Payment arrived after the hold expired and the tickets were no longer available — it will be refunded.",
+    "ticketsTitle": "{count, plural, one {# ticket} other {# tickets}}",
+    "showQr": "Show QR code",
+    "status": {
+      "pending_payment": "Awaiting payment",
+      "paid": "Confirmed",
+      "expired": "Expired",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded",
+      "partially_refunded": "Partially refunded",
+      "needs_refund": "Needs refund"
+    }
+  },
+  "Tickets": {
+    "title": "My tickets",
+    "subtitle": "Show the QR code at the entrance",
+    "emptyTitle": "No tickets yet",
+    "emptyBody": "Confirmed tickets appear here, each with its own QR code.",
+    "browse": "Browse events",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "qrLabel": "Entry QR code",
+    "qrHint": "Unique and secret — don't share it",
+    "usedAt": "Used at entry {date}",
+    "voided": "This ticket has been voided",
+    "date": "When",
+    "venue": "Venue",
+    "order": "Order",
+    "online": "Online",
+    "print": "Print / save as PDF",
+    "eventPage": "Event page",
+    "status": {
+      "valid": "Valid",
+      "checked_in": "Used",
+      "void": "Void"
+    }
+  },
+  "CheckIn": {
+    "title": "Ticket check-in",
+    "subtitle": "Scan the QR code or enter the printed ticket code",
+    "chooseEvent": "Choose the event",
+    "selectFirst": "Choose an event to start scanning.",
+    "noEvents": "No current published events",
+    "noEventsBody": "Your organization's upcoming or ongoing published events appear here.",
+    "startCamera": "Start camera",
+    "stopCamera": "Stop camera",
+    "starting": "Starting camera",
+    "cameraOff": "Start the camera and point it at a QR code",
+    "cameraDenied": "Camera access was denied. Use manual entry or allow the camera in your browser settings.",
+    "cameraUnsupported": "This browser doesn't support the camera. Use manual entry.",
+    "manualLabel": "Ticket code",
+    "check": "Check",
+    "checking": "Checking…",
+    "next": "Next ticket",
+    "usedAt": "Checked in {date}",
+    "result": {
+      "ok": "Entry allowed ✓",
+      "already_used": "Already used",
+      "wrong_event": "Ticket for another event",
+      "void": "Voided ticket",
+      "invalid": "Invalid ticket",
+      "error": "Couldn't verify — please try again"
     }
   }
 }
