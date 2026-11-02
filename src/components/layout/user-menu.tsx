@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, LogOut, ShieldCheck, User } from "lucide-react";
+import { Briefcase, ChevronDown, LogOut, ShieldCheck, User } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { useSession } from "@/components/providers/session-provider";
@@ -68,12 +68,16 @@ export function UserMenu() {
   const locale = useLocale();
 
   if (session.status === "loading") {
-    return <Skeleton className="size-8 rounded-full" aria-hidden />;
+    return <Skeleton className="h-10 w-10 rounded-full md:w-36" aria-hidden />;
   }
 
   if (session.status === "anonymous") {
     return (
-      <Button asChild variant="ghost" className="hidden md:inline-flex" data-testid="header-login">
+      <Button
+        asChild
+        className="hidden h-10 rounded-full bg-gradient-neon px-5 text-white glow-primary hover:opacity-95 md:inline-flex"
+        data-testid="header-login"
+      >
         <Link href={routes.login}>{tNav("login")}</Link>
       </Button>
     );
@@ -83,15 +87,18 @@ export function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full"
+        <button
+          type="button"
           aria-label={t("label")}
           data-testid="user-menu"
+          className="glass flex h-10 items-center gap-2 rounded-full p-1 pe-1 transition-all hover:border-primary/50 focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:outline-none md:pe-3"
         >
           <UserAvatar name={user.name} email={user.email} url={user.avatarUrl} />
-        </Button>
+          <span className="hidden max-w-32 truncate text-sm font-semibold md:inline">
+            {t("greeting", { name: (user.name ?? user.email ?? "").split(/[s@]/)[0] })}
+          </span>
+          <ChevronDown className="hidden size-4 text-muted-foreground md:block" aria-hidden />
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
         <DropdownMenuLabel className="grid gap-0.5">

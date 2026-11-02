@@ -20,8 +20,8 @@ export function generateStaticParams() {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f7fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0f1f" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f4fd" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0920" },
   ],
 };
 
@@ -70,6 +70,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         </noscript>
         <NextIntlClientProvider>
           <AppProviders dir={dir}>
+            {/* توهجات الخلفية الثابتة خلف كل الصفحات */}
+            <div aria-hidden className="page-backdrop pointer-events-none fixed inset-0 -z-50" />
             <SkipLink />
             <SiteHeader />
             <main id="main-content" tabIndex={-1} className="flex-1 outline-none">

@@ -1105,6 +1105,15 @@ export type Database = {
         };
         Returns: string;
       };
+      get_platform_stats: {
+        Args: never;
+        Returns: {
+          approved_organizers: number;
+          published_events: number;
+          registered_users: number;
+          tickets_sold: number;
+        }[];
+      };
       get_popular_events: {
         Args: { p_days?: number; p_limit?: number };
         Returns: {

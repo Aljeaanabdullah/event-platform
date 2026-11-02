@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useTheme } from "next-themes";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -47,6 +48,9 @@ export function HeroVisual({ labels, className }: { labels: TicketLabels; classN
   const [capability, setCapability] = useState<Capability | null>(null);
   const [visible, setVisible] = useState(false);
   const [ready, setReady] = useState(false);
+  // الثيم الفعلي (بعد احتساب "حسب الجهاز") — المشهد يعدّل الألوان والمزج حسبه
+  const { resolvedTheme } = useTheme();
+  const sceneTheme = resolvedTheme === "light" ? "light" : "dark";
 
   // نبدأ بعد أن يصبح المتصفح خاملًا حتى لا نؤخر تفاعل المستخدم مع الصفحة
   useEffect(() => {
@@ -89,12 +93,15 @@ export function HeroVisual({ labels, className }: { labels: TicketLabels; classN
         <div
           className={cn(
             "absolute inset-0 transition-opacity duration-700",
+            // تلاشي الحواف حتى لا تظهر حدود اللوحة المستطيلة حول الأشعة والتوهج
+            "[mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent),linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] [mask-composite:intersect]",
             ready ? "opacity-100" : "opacity-0",
           )}
         >
           <HeroScene
             labels={labels}
             quality={capability.quality}
+            theme={sceneTheme}
             followPointer={capability.followPointer}
             active={visible}
             onReady={handleReady}

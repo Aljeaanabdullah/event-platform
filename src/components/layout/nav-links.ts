@@ -1,5 +1,6 @@
 /** روابط التنقل الرئيسية — المفاتيح من ملفات الترجمة (Nav.*) */
 export const mainNav = [
+  { href: "/", key: "home" },
   { href: "/events", key: "events" },
   { href: "/#categories", key: "categories" },
   { href: "/#organizers", key: "forOrganizers" },

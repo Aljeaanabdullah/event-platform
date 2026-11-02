@@ -9,6 +9,8 @@
  */
 import { z } from "zod";
 
+import { siteUrl } from "./site-url";
+
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_SITE_URL: z.url(),
   NEXT_PUBLIC_SUPABASE_URL: z.url(),
@@ -23,7 +25,7 @@ export function publicEnv(): PublicEnv {
   if (cached) return cached;
 
   const parsed = publicEnvSchema.safeParse({
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_SITE_URL: siteUrl,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   });

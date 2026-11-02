@@ -14,7 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+export { siteUrl } from "@/lib/site-url";
 
 /**
  * التصنيفات المبدئية. الأسماء في ملفات الترجمة (Categories.<slug>).

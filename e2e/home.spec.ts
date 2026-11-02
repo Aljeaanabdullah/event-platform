@@ -27,21 +27,33 @@ test.describe("الصفحة الرئيسية", () => {
     });
   });
 
-  test("نموذج البحث ينقل إلى صفحة الفعاليات مع الفلاتر", async ({ page }) => {
+  test("بحث الـ Hero ينقل إلى صفحة الفعاليات", async ({ page }) => {
     await page.goto("/ar");
     await page.getByLabel("ابحث بالاسم", { exact: true }).fill("جاز");
-    await page.getByLabel("التصنيف", { exact: true }).selectOption("music");
-    await page.getByLabel("المنطقة", { exact: true }).selectOption("hawalli");
     await page.getByRole("button", { name: "ابحث", exact: true }).click();
 
     await expect(page).toHaveURL(/\/ar\/events\?/);
-    const url = new URL(page.url());
-    expect(url.searchParams.get("q")).toBe("جاز");
-    expect(url.searchParams.get("category")).toBe("music");
-    await expect(page.getByText("موسيقى", { exact: true })).toBeVisible();
-    await expect(page.getByText("حولي", { exact: true })).toBeVisible();
+    expect(new URL(page.url()).searchParams.get("q")).toBe("جاز");
     // لا توجد فعاليات منشورة بعد: حالة فارغة صادقة بدل نتائج وهمية
     await expect(page.getByText("لا توجد فعاليات مطابقة")).toBeVisible();
+  });
+
+  test("بلاطات التصنيفات في الـ Hero روابط حقيقية بحالة نشطة", async ({ page }) => {
+    await page.goto("/ar");
+    const tiles = page.getByRole("navigation", { name: "تصفّح حسب التصنيف" });
+    await expect(tiles.getByRole("link", { name: "الكل" })).toHaveAttribute("aria-current", "page");
+    await tiles.getByRole("link", { name: "موسيقى" }).click();
+    await expect(page).toHaveURL(/\/ar\/events\?category=music$/);
+    await expect(page.getByText("موسيقى", { exact: true })).toBeVisible();
+  });
+
+  test("الفعاليات المميزة وشريط الإحصائيات بلا بيانات وهمية", async ({ page }) => {
+    await page.goto("/ar");
+    // لا توجد فعاليات منشورة: حالة فارغة داخل القسم، والشريط يعرض المزايا بدل أرقام صفرية
+    const featured = page.getByRole("region", { name: "فعاليات مميزة" });
+    await featured.scrollIntoViewIfNeeded();
+    await expect(featured.getByText("لا توجد فعاليات منشورة بعد")).toBeVisible();
+    await expect(page.getByTestId("stats-bar")).toHaveAttribute("data-mode", "features");
   });
 
   test("التصنيفات تظهر عند التمرير وتربط بصفحة الفعاليات", async ({ page }) => {

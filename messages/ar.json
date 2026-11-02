@@ -44,9 +44,9 @@
     "titleStart": "اكتشف تجارب",
     "titleHighlight": "لا تُنسى",
     "titleEnd": "من حولك",
-    "subtitle": "مؤتمرات، ورش عمل، حفلات، معارض وأنشطة عائلية — ابحث واحجز تذكرتك في دقائق.",
+    "subtitle": "منصة متكاملة للفعاليات في الكويت، تجمع بين الترفيه، الثقافة، الرياضة، والأعمال في مكان واحد.",
     "searchLabel": "ابحث بالاسم",
-    "searchPlaceholder": "اسم الفعالية أو المكان",
+    "searchPlaceholder": "ابحث عن فعالية، منظّم، أو موقع…",
     "areaLabel": "المنطقة",
     "anyArea": "كل المناطق",
     "dateLabel": "التاريخ",
@@ -55,7 +55,11 @@
     "submit": "ابحث",
     "searchFormLabel": "البحث عن الفعاليات",
     "ticketTitle": "تذكرة دخول",
-    "ticketSubtitle": "الكويت · فعاليات"
+    "ticketSubtitle": "الكويت · فعاليات",
+    "titleLine1": "اكتشف فعاليات الكويت",
+    "titleLine2": "واحجز مقعدك الآن",
+    "allCategories": "الكل",
+    "categoriesLabel": "تصفّح حسب التصنيف"
   },
   "DatePresets": {
     "any": "أي وقت",
@@ -90,7 +94,7 @@
   "Home": {
     "featured": {
       "title": "فعاليات مميزة",
-      "subtitle": "اختيارات فريقنا لهذا الموسم"
+      "subtitle": "أحدث الفعاليات وأكثرها طلبًا في الكويت"
     },
     "thisWeek": {
       "title": "هذا الأسبوع",
@@ -129,6 +133,12 @@
       "point3": "تحقق من التذاكر عبر QR عند الدخول",
       "point4": "تقارير مبيعات ومتابعة مستحقاتك",
       "cta": "انضم كمنظّم"
+    },
+    "viewAllEvents": "عرض جميع الفعاليات",
+    "carousel": {
+      "previous": "السابق",
+      "next": "التالي",
+      "goTo": "الانتقال إلى المجموعة {n}"
     }
   },
   "EventCard": {
@@ -140,7 +150,11 @@
       "cancelled": "ملغاة",
       "ended": "انتهت"
     },
-    "byOrganizer": "تنظيم {name}"
+    "byOrganizer": "تنظيم {name}",
+    "bookNow": "احجز الآن",
+    "addFavorite": "إضافة إلى المفضلة",
+    "removeFavorite": "إزالة من المفضلة",
+    "favoriteError": "تعذّر تحديث المفضلة، حاول مجددًا"
   },
   "Events": {
     "title": "الفعاليات",
@@ -185,7 +199,8 @@
     "sampleSuccess": "تم الحفظ بنجاح",
     "sampleError": "تعذّر إتمام العملية",
     "sampleInfo": "هذه بيانات تجريبية للعرض فقط",
-    "buttons": "الأزرار"
+    "buttons": "الأزرار",
+    "homePreviewBanner": "معاينة للتطوير ببيانات تجريبية — ليست فعاليات حقيقية ولا تظهر في الإنتاج."
   },
   "Auth": {
     "layout": {
@@ -286,7 +301,8 @@
     "organizer": "لوحة المنظّم",
     "becomeOrganizer": "انضم كمنظّم",
     "admin": "لوحة الإدارة",
-    "signOut": "تسجيل الخروج"
+    "signOut": "تسجيل الخروج",
+    "greeting": "مرحبًا {name}"
   },
   "Account": {
     "title": "حسابي",
@@ -382,5 +398,37 @@
       "publishedEvents": "فعاليات منشورة"
     },
     "comingSoon": "أدوات المراجعة والتقارير المالية تُضاف في المرحلة 9."
+  },
+  "CategoriesShort": {
+    "conferences": "مؤتمرات",
+    "workshops": "ورش",
+    "tech-ai": "تقنية",
+    "business": "أعمال",
+    "exhibitions": "معارض",
+    "entertainment": "ترفيه",
+    "theater": "مسرح",
+    "music": "موسيقى",
+    "sports": "رياضة",
+    "family": "عائلة",
+    "education": "تعليم",
+    "outdoor": "خارجية"
+  },
+  "Notifications": {
+    "label": "الإشعارات",
+    "labelUnread": "الإشعارات ({count} غير مقروءة)",
+    "title": "الإشعارات",
+    "markAllRead": "تعليم الكل كمقروء",
+    "empty": "لا توجد إشعارات بعد"
+  },
+  "Stats": {
+    "label": "عن المنصة",
+    "slogan": "منصتك الأولى للفعاليات في الكويت",
+    "events": "فعالية منشورة",
+    "users": "مستخدم مسجّل",
+    "organizers": "منظّم فعاليات",
+    "tickets": "تذكرة محجوزة",
+    "featurePayments": "دفع آمن عبر KNET والبطاقات",
+    "featureTickets": "تذاكر QR فورية على جوالك",
+    "featureBilingual": "تجربة عربية وإنجليزية كاملة"
   }
 }

@@ -24,7 +24,7 @@ export default getRequestConfig(async ({ locale }) => {
     messages: (await import(`../../messages/${locale}.json`)).default,
     formats: {
       dateTime: {
-        eventDate: { weekday: "short", day: "numeric", month: "short" },
+        eventDate: { weekday: "long", day: "numeric", month: "long", year: "numeric" },
         eventDateTime: {
           weekday: "short",
           day: "numeric",
