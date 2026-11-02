@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run lint && npm run typecheck && npm run format:check && npm run test && npm run build"
+    "check": "npm run lint && npm run typecheck && npm run format:check && npm run test && npm run build",
+    "test:db:concurrency": "node --env-file=.env.local scripts/concurrency-test.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.1",
