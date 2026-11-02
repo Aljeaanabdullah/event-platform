@@ -717,7 +717,7 @@
     "holdLeft": "Your tickets are held for {time}",
     "holdExpired": "The hold has expired — tickets may be released",
     "paymentTitle": "Payment",
-    "paymentPending": "Sandbox online payment is enabled in the next phase.",
+    "paymentPending": "Online payment is available below.",
     "cancel": "Cancel booking",
     "cancelled": "Booking cancelled and tickets released",
     "cancelFailed": "Couldn't cancel"
@@ -797,6 +797,67 @@
       "void": "Voided ticket",
       "invalid": "Invalid ticket",
       "error": "Couldn't verify — please try again"
+    }
+  },
+  "Payment": {
+    "payNow": "Pay {amount}",
+    "sandboxNote": "Sandbox environment — no real money will be charged.",
+    "hostedNote": "Payment happens on the payment provider's secure page. We never receive or store your card details.",
+    "notConfigured": "Online payment isn't enabled in this environment yet. You can cancel the booking or come back later.",
+    "lastFailed": "Your previous payment attempt didn't go through. You can try again before the hold expires.",
+    "startErrors": {
+      "notConfigured": "Payments aren't enabled right now",
+      "notPayable": "This order can't be paid (the hold may have expired)",
+      "tooManyAttempts": "Too many payment attempts for this order",
+      "sessionExpired": "Your session expired — please sign in again",
+      "providerError": "Couldn't reach the payment provider — please try again"
+    },
+    "mock": {
+      "bannerTitle": "Mock payment provider for testing",
+      "bannerBody": "This isn't a real payment gateway and never asks for card details. Choose an outcome to simulate.",
+      "title": "Test payment",
+      "order": "Order number",
+      "amount": "Amount",
+      "succeed": "Simulate successful payment",
+      "fail": "Simulate failed payment",
+      "cancel": "Simulate cancelled payment",
+      "alreadyHandled": "This payment has already been processed.",
+      "backToCheckout": "Back to checkout",
+      "errors": {
+        "disabled": "The mock provider is disabled in this environment",
+        "notFound": "Payment not found",
+        "serverKeyMissing": "Can't process: the server key SUPABASE_SECRET_KEY isn't set in this environment.",
+        "failed": "Couldn't process the payment"
+      }
+    },
+    "status": {
+      "viewTickets": "View tickets",
+      "tryAgain": "Try paying again",
+      "backToEvent": "Back to event",
+      "success": {
+        "title": "Payment successful",
+        "body": "Your booking is confirmed and your tickets are issued. You'll also find them under My tickets."
+      },
+      "failed": {
+        "title": "Payment failed",
+        "body": "No money was taken and no tickets were issued. You can try again while your hold is active."
+      },
+      "cancelled": {
+        "title": "Payment cancelled",
+        "body": "You cancelled the payment. Your booking stays on hold until it expires."
+      },
+      "processing": {
+        "title": "Confirming payment…",
+        "body": "Waiting for a trusted confirmation from the payment provider. This page refreshes automatically."
+      },
+      "expired": {
+        "title": "Booking expired",
+        "body": "The hold expired or the order was cancelled. You can book again if tickets are still available."
+      },
+      "refund": {
+        "title": "Your payment will be refunded",
+        "body": "Payment arrived after the hold expired and the tickets were no longer available. It will be refunded."
+      }
     }
   }
 }

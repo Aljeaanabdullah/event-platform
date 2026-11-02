@@ -186,6 +186,85 @@ begin
   perform set_config('role', 'postgres', true);
   update public.organizers set is_test = false where id = v_org;
 
+  -- ===================================================================
+  -- Phase 7 — الحجز والتحقق بالرمز المطبوع
+  -- ===================================================================
+  perform set_config('role', 'authenticated', true);
+  perform set_config('request.jwt.claims', json_build_object('sub', u_c1, 'role', 'authenticated')::text, true);
+
+  -- P7-01: حجز مجاني يُؤكد فورًا ويصدر تذكرتين
+  select * into v_order from public.reserve_tickets(v_event, jsonb_build_array(jsonb_build_object('ticket_type_id', v_tt_free, 'quantity', 2)));
+  if v_order.status = 'paid' and (select count(*) from public.tickets where order_id = v_order.order_id) = 2 then
+    passed := passed + 1; else failures := failures || 'P7-01 free booking'; end if;
+
+  -- P7-02: التحقق بالرمز المطبوع — الماسح عضو في الجهة
+  select * into v_ticket from public.tickets where order_id = v_order.order_id limit 1;
+  perform set_config('request.jwt.claims', json_build_object('sub', u_scanner, 'role', 'authenticated')::text, true);
+  v_json := public.check_in_ticket_code(lower(v_ticket.code), v_event);
+  if v_json ->> 'result' = 'ok' and public.check_in_ticket_code(v_ticket.code, v_event) ->> 'result' = 'already_used' then
+    passed := passed + 1; else failures := failures || ('P7-02 code check-in ' || v_json::text); end if;
+
+  -- P7-03: منظّم جهة أخرى => invalid، ورمز بصيغة خاطئة => invalid
+  perform set_config('request.jwt.claims', json_build_object('sub', u_other, 'role', 'authenticated')::text, true);
+  if public.check_in_ticket_code(v_ticket.code) ->> 'result' = 'invalid'
+     and public.check_in_ticket_code('DROP TABLE') ->> 'result' = 'invalid' then
+    passed := passed + 1; else failures := failures || 'P7-03 other org / bad code'; end if;
+
+  -- ===================================================================
+  -- Phase 8 — جلسات الدفع
+  -- ===================================================================
+  perform set_config('request.jwt.claims', json_build_object('sub', u_c1, 'role', 'authenticated')::text, true);
+  select * into v_order from public.reserve_tickets(v_event, jsonb_build_array(jsonb_build_object('ticket_type_id', v_tt, 'quantity', 2)));
+
+  -- P8-01: المبلغ من الطلب فقط (2 × 5.250 = 10.500)
+  select * into v_pay from public.start_order_payment(v_order.order_id, 'mock');
+  if v_pay.amount_fils = 10500 then passed := passed + 1; else failures := failures || ('P8-01 amount ' || v_pay.amount_fils); end if;
+  perform public.attach_payment_session(v_pay.payment_id, 'mock_' || v_pay.payment_id);
+
+  -- P8-02: مستخدم آخر لا يبدأ دفعًا لطلب غيره
+  perform set_config('request.jwt.claims', json_build_object('sub', u_c2, 'role', 'authenticated')::text, true);
+  begin
+    perform public.start_order_payment(v_order.order_id, 'mock');
+    failures := failures || 'P8-02 pay other user order';
+  exception when others then
+    if sqlerrm = 'NOT_FOUND' then passed := passed + 1; else failures := failures || ('P8-02 ' || sqlerrm); end if;
+  end;
+
+  -- P8-03: العميل لا يستطيع تعليم الدفع فاشلًا أو تأكيده بنفسه
+  begin
+    perform public.mark_payment_failed(v_pay.payment_id, 'failed', 'x', null);
+    failures := failures || 'P8-03 customer mark_payment_failed';
+  exception when insufficient_privilege then passed := passed + 1;
+  end;
+
+  -- P8-04 (كـ service_role): مبلغ خاطئ مرفوض، ثم التأكيد مرة واحدة فقط
+  perform set_config('role', 'service_role', true);
+  begin
+    perform public.confirm_order_payment(v_order.order_id, 'mock', 'mock_' || v_pay.payment_id, 1);
+    failures := failures || 'P8-04 amount mismatch accepted';
+  exception when others then
+    if sqlerrm = 'AMOUNT_MISMATCH' then passed := passed + 1; else failures := failures || ('P8-04 ' || sqlerrm); end if;
+  end;
+  if public.confirm_order_payment(v_order.order_id, 'mock', 'mock_' || v_pay.payment_id, 10500) = 'paid'
+     and public.confirm_order_payment(v_order.order_id, 'mock', 'mock_' || v_pay.payment_id, 10500) = 'already_paid' then
+    passed := passed + 1; else failures := failures || 'P8-05 confirm idempotency'; end if;
+  perform set_config('role', 'postgres', true);
+  if (select count(*) from public.tickets where order_id = v_order.order_id) = 2
+     and (select status from public.payments where id = v_pay.payment_id) = 'succeeded'
+     and (select platform_commission_fils from public.orders where id = v_order.order_id) = 525 then
+    passed := passed + 1; else failures := failures || 'P8-06 tickets once + commission 5%'; end if;
+
+  -- P8-07: لا يمكن بدء دفع لطلب مدفوع
+  perform set_config('role', 'authenticated', true);
+  perform set_config('request.jwt.claims', json_build_object('sub', u_c1, 'role', 'authenticated')::text, true);
+  begin
+    perform public.start_order_payment(v_order.order_id, 'mock');
+    failures := failures || 'P8-07 pay paid order';
+  exception when others then
+    if sqlerrm = 'ORDER_NOT_PAYABLE' then passed := passed + 1; else failures := failures || ('P8-07 ' || sqlerrm); end if;
+  end;
+  perform set_config('role', 'postgres', true);
+
   -- ===== النتيجة =====
   raise exception 'TEST_SUMMARY passed=% failed=% %', passed, coalesce(array_length(failures, 1), 0), array_to_string(failures, ' | ');
 end;
