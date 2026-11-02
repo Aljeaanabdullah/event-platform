@@ -63,3 +63,10 @@ describe("formatMoney", () => {
     expect(out).not.toContain("NaN");
   });
 });
+
+describe("formatMoney — الأرقام", () => {
+  it("يستخدم أرقامًا لاتينية في العربية لتطابق التواريخ", () => {
+    expect(formatMoney(15_000, "ar")).toMatch(/15[.,٫]000/);
+    expect(formatMoney(15_000, "ar")).not.toMatch(/[٠-٩]/);
+  });
+});

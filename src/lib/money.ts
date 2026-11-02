@@ -44,10 +44,13 @@ export function filsToKwdString(fils: number): string {
   return `${sign}${whole}.${fraction}`;
 }
 
-/** تنسيق المبلغ للعرض حسب اللغة (أرقام وعملة محلية). */
+/**
+ * تنسيق المبلغ للعرض حسب اللغة.
+ * نستخدم الأرقام اللاتينية في العربية أيضًا (‎-u-nu-latn) لتتطابق مع التواريخ وأسلوب المواقع الخليجية.
+ */
 export function formatMoney(fils: number, locale: string, currency = DEFAULT_CURRENCY): string {
   assertFils(fils);
-  return new Intl.NumberFormat(locale === "ar" ? "ar-KW" : "en-KW", {
+  return new Intl.NumberFormat(locale === "ar" ? "ar-KW-u-nu-latn" : "en-KW", {
     style: "currency",
     currency,
     minimumFractionDigits: 3,

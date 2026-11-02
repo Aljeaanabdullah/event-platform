@@ -1,0 +1,189 @@
+{
+  "Metadata": {
+    "title": "Event Platform — Discover and book the best events in Kuwait",
+    "shortTitle": "Event Platform",
+    "description": "Discover and book tickets for conferences, workshops, concerts, exhibitions and family events in Kuwait."
+  },
+  "Common": {
+    "appName": "Event Platform",
+    "loading": "Loading…",
+    "retry": "Try again",
+    "backHome": "Back to home",
+    "viewAll": "View all",
+    "browseEvents": "Browse events",
+    "comingSoon": "Coming soon"
+  },
+  "Nav": {
+    "skipToContent": "Skip to content",
+    "mainNavigation": "Main navigation",
+    "home": "Home",
+    "events": "Events",
+    "categories": "Categories",
+    "forOrganizers": "For organizers",
+    "search": "Search events",
+    "addEvent": "List your event",
+    "login": "Sign in",
+    "openMenu": "Open menu",
+    "menu": "Menu",
+    "homeLink": "Event Platform — Home"
+  },
+  "Theme": {
+    "toggle": "Change theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "Locale": {
+    "switchTo": "Switch to Arabic",
+    "targetName": "العربية",
+    "label": "Language"
+  },
+  "Hero": {
+    "eyebrow": "All of Kuwait's events in one place",
+    "titleStart": "Discover",
+    "titleHighlight": "unforgettable",
+    "titleEnd": "experiences near you",
+    "subtitle": "Conferences, workshops, concerts, exhibitions and family outings — search and book your ticket in minutes.",
+    "searchLabel": "Search by name",
+    "searchPlaceholder": "Event name or venue",
+    "areaLabel": "Area",
+    "anyArea": "All areas",
+    "dateLabel": "Date",
+    "categoryLabel": "Category",
+    "anyCategory": "All categories",
+    "submit": "Search",
+    "searchFormLabel": "Search events",
+    "ticketTitle": "Admit One",
+    "ticketSubtitle": "Kuwait · Events"
+  },
+  "DatePresets": {
+    "any": "Any time",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "this-week": "This week",
+    "weekend": "This weekend",
+    "next-30-days": "Next 30 days"
+  },
+  "Areas": {
+    "capital": "Capital",
+    "hawalli": "Hawalli",
+    "farwaniya": "Farwaniya",
+    "ahmadi": "Ahmadi",
+    "jahra": "Jahra",
+    "mubarak-al-kabeer": "Mubarak Al-Kabeer"
+  },
+  "Categories": {
+    "conferences": "Conferences",
+    "workshops": "Workshops",
+    "tech-ai": "Tech & AI",
+    "business": "Business & Startups",
+    "exhibitions": "Exhibitions",
+    "entertainment": "Entertainment",
+    "theater": "Theater",
+    "music": "Music",
+    "sports": "Sports",
+    "family": "Family",
+    "education": "Education",
+    "outdoor": "Outdoor"
+  },
+  "Home": {
+    "featured": {
+      "title": "Featured events",
+      "subtitle": "Hand-picked by our team this season"
+    },
+    "thisWeek": {
+      "title": "This week",
+      "subtitle": "Don't miss what's happening in the next few days"
+    },
+    "weekend": {
+      "title": "This weekend",
+      "subtitle": "Plan your Thursday to Saturday"
+    },
+    "free": {
+      "title": "Free events",
+      "subtitle": "Great experiences, no paid ticket required"
+    },
+    "upcoming": {
+      "title": "Upcoming events",
+      "subtitle": "Book early before tickets run out"
+    },
+    "popular": {
+      "title": "Most popular",
+      "subtitle": "Based on actual bookings in the last 30 days"
+    },
+    "categories": {
+      "title": "Browse by category",
+      "subtitle": "Find what matches your interests"
+    },
+    "empty": {
+      "title": "No events published yet",
+      "description": "We're onboarding organizers to publish the first events. Check back soon — or be the first to list yours."
+    },
+    "organizers": {
+      "eyebrow": "For organizers",
+      "title": "Publish your event and start selling in minutes",
+      "description": "Everything you need to manage events, tickets and attendees — with secure payments and live sales reports.",
+      "point1": "A polished event page in Arabic and English",
+      "point2": "Flexible ticket types, prices and quantities",
+      "point3": "QR ticket check-in at the door",
+      "point4": "Sales reports and payout tracking",
+      "cta": "Become an organizer"
+    }
+  },
+  "EventCard": {
+    "free": "Free",
+    "from": "From {price}",
+    "status": {
+      "available": "Tickets available",
+      "sold_out": "Sold out",
+      "cancelled": "Cancelled",
+      "ended": "Ended"
+    },
+    "byOrganizer": "By {name}"
+  },
+  "Events": {
+    "title": "Events",
+    "subtitle": "Search all published events in Kuwait",
+    "activeFilters": "Filters",
+    "clearFilters": "Clear filters",
+    "emptyTitle": "No matching events",
+    "emptyDescription": "We couldn't find published events matching your search right now. Try different filters or check back later."
+  },
+  "Footer": {
+    "tagline": "Discover and book the best events in Kuwait and the Gulf.",
+    "discover": "Discover",
+    "allEvents": "All events",
+    "thisWeekend": "This weekend",
+    "freeEvents": "Free events",
+    "organizers": "Organizers",
+    "becomeOrganizer": "Become an organizer",
+    "rights": "© {year} Event Platform. All rights reserved.",
+    "madeIn": "Made in Kuwait",
+    "preferences": "Preferences"
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page may have been moved or deleted, or the link is incorrect."
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "description": "Sorry, we hit a problem loading this page. Please try again in a moment.",
+    "reference": "Reference: {digest}"
+  },
+  "DevShowcase": {
+    "title": "UI components",
+    "description": "Development-only page showing the visual identity components with sample data. Not available in production.",
+    "cards": "Event cards",
+    "skeletons": "Loading state",
+    "states": "Empty and error states",
+    "toasts": "Notifications",
+    "toastSuccess": "Success toast",
+    "toastError": "Error toast",
+    "toastInfo": "Info toast",
+    "sampleSuccess": "Saved successfully",
+    "sampleError": "Couldn't complete the action",
+    "sampleInfo": "This is sample data for display only",
+    "buttons": "Buttons"
+  }
+}

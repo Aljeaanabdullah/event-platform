@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 /**
  * ترويسات أمان أساسية لكل الصفحات.
@@ -15,6 +18,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    // صفحة 404 للمسارات خارج أي لغة (مثل /unknown.txt)
+    globalNotFound: true,
+  },
   turbopack: {
     rules: {
       "*.css": {
@@ -28,4 +35,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

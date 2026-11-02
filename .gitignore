@@ -52,3 +52,6 @@ next-env.d.ts
 # supabase local
 supabase/.temp/
 supabase/.branches/
+
+# إعدادات محلية لأدوات التطوير
+/.claude/
