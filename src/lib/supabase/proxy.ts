@@ -18,25 +18,28 @@ export async function refreshSession(request: NextRequest) {
   const cookiesToSet: CookieToSet[] = [];
   const headers: Record<string, string> = {};
 
-  const supabase = createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookies, cacheHeaders) {
-          cookies.forEach(({ name, value, options }) => {
-            request.cookies.set(name, value);
-            cookiesToSet.push({ name, value, options });
-          });
-          // ترويسات تمنع تخزين الاستجابة التي تحمل كوكيز الجلسة في الـ CDN
-          Object.assign(headers, cacheHeaders);
-        },
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) {
+    // إعداد ناقص في البيئة: الصفحات العامة تعمل، والمسارات المحمية تحوّل لصفحة الدخول
+    return { userId: null, cookiesToSet, headers };
+  }
+
+  const supabase = createServerClient<Database>(url, key, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll();
+      },
+      setAll(cookies, cacheHeaders) {
+        cookies.forEach(({ name, value, options }) => {
+          request.cookies.set(name, value);
+          cookiesToSet.push({ name, value, options });
+        });
+        // ترويسات تمنع تخزين الاستجابة التي تحمل كوكيز الجلسة في الـ CDN
+        Object.assign(headers, cacheHeaders);
       },
     },
-  );
+  });
 
   // لا تضع أي كود بين إنشاء العميل و getClaims (توصية Supabase)
   const { data } = await supabase.auth.getClaims();

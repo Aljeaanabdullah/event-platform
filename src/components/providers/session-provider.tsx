@@ -7,7 +7,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-import { createClient } from "@/lib/supabase/client";
+import { getBrowserClient } from "@/lib/supabase/client";
 
 export type SessionUser = {
   id: string;
@@ -32,14 +32,19 @@ const SessionContext = createContext<SessionState>({ status: "loading" });
 const FavoritesContext = createContext<FavoritesApi>({ ids: new Set(), toggle: async () => false });
 
 export function SessionProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = useState<SessionState>({ status: "loading" });
+  // بدون إعداد Supabase في هذه البيئة يكون الزائر مجهولًا مباشرة (نفس النتيجة على الخادم والمتصفح)
+  const [state, setState] = useState<SessionState>(() =>
+    getBrowserClient() ? { status: "loading" } : { status: "anonymous" },
+  );
   const [favorites, setFavorites] = useState<ReadonlySet<string>>(new Set());
-  const supabase = useMemo(() => createClient(), []);
 
   useEffect(() => {
     let cancelled = false;
+    const supabase = getBrowserClient();
+    if (!supabase) return;
 
     async function load() {
+      if (!supabase) return;
       const { data } = await supabase.auth.getClaims();
       const userId = data?.claims?.sub;
       if (!userId) {
@@ -81,7 +86,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       cancelled = true;
       sub.subscription.unsubscribe();
     };
-  }, [supabase]);
+  }, []);
 
   const userId = state.status === "authenticated" ? state.user.id : null;
 
@@ -95,6 +100,11 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       else next.add(eventId);
       setFavorites(next);
 
+      const supabase = getBrowserClient();
+      if (!supabase) {
+        setFavorites(favorites);
+        return false;
+      }
       const { error } = wasFavorite
         ? await supabase.from("favorites").delete().eq("user_id", userId).eq("event_id", eventId)
         : await supabase.from("favorites").insert({ user_id: userId, event_id: eventId });
@@ -105,7 +115,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       }
       return true;
     },
-    [favorites, supabase, userId],
+    [favorites, userId],
   );
 
   const favoritesApi = useMemo(() => ({ ids: favorites, toggle }), [favorites, toggle]);

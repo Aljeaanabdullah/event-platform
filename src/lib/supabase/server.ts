@@ -12,8 +12,9 @@ import { publicEnv } from "@/lib/env";
 import type { Database } from "@/types/database";
 
 export async function createClient() {
-  const env = publicEnv();
+  // cookies() أولًا: يعلّم الصفحة كديناميكية فلا يحاول Next.js عرضها مسبقًا وقت البناء
   const cookieStore = await cookies();
+  const env = publicEnv();
 
   return createServerClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,

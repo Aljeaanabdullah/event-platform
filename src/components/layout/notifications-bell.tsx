@@ -2,7 +2,7 @@
 
 import { Bell, CheckCheck } from "lucide-react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { useSession } from "@/components/providers/session-provider";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "@/i18n/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { getBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 type Notification = {
@@ -38,20 +38,19 @@ export function NotificationsBell() {
   const t = useTranslations("Notifications");
   const locale = useLocale();
   const format = useFormatter();
-  const supabase = useMemo(() => createClient(), []);
   const [items, setItems] = useState<Notification[]>([]);
 
   const userId = session.status === "authenticated" ? session.user.id : null;
 
-  const fetchLatest = useCallback(
-    () =>
-      supabase
-        .from("notifications")
-        .select("id, title_ar, title_en, body_ar, body_en, link, read_at, created_at")
-        .order("created_at", { ascending: false })
-        .limit(6),
-    [supabase],
-  );
+  const fetchLatest = useCallback(async () => {
+    const supabase = getBrowserClient();
+    if (!supabase) return { data: [] as Notification[] };
+    return supabase
+      .from("notifications")
+      .select("id, title_ar, title_en, body_ar, body_en, link, read_at, created_at")
+      .order("created_at", { ascending: false })
+      .limit(6);
+  }, []);
 
   useEffect(() => {
     if (!userId) return;
@@ -78,7 +77,7 @@ export function NotificationsBell() {
     if (ids.length === 0) return;
     const now = new Date().toISOString();
     setItems((prev) => prev.map((n) => (n.read_at ? n : { ...n, read_at: now })));
-    await supabase.from("notifications").update({ read_at: now }).in("id", ids);
+    await getBrowserClient()?.from("notifications").update({ read_at: now }).in("id", ids);
   }
 
   return (

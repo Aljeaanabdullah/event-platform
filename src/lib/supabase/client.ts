@@ -14,3 +14,16 @@ export function createClient() {
     env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   );
 }
+
+let browserClient: ReturnType<typeof createClient> | undefined;
+
+/**
+ * عميل المتصفح المشترك — يُنشأ عند أول استخدام فقط.
+ * يجب استدعاؤه داخل effects أو معالجات الأحداث، وليس أثناء الرسم:
+ * الرسم يحدث أيضًا على الخادم وقت البناء، حيث قد لا تكون متغيرات البيئة متاحة.
+ */
+export function getBrowserClient(): ReturnType<typeof createClient> | null {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return null;
+  browserClient ??= createClient();
+  return browserClient;
+}
