@@ -28,7 +28,7 @@
 1. **قاعدة بيانات مستقلة للإنتاج**: ✅ أُنشئ `event-platform-prod` وطُبّقت عليه كل الـ Migrations (2026-11-03).
    المتبقي: ربطه بـ Vercel **Production فقط** (`NEXT_PUBLIC_SUPABASE_URL=https://dnmruaqryzqvfhhiltvq.supabase.co`
    والمفتاحان من لوحته)، وإعداد Auth URLs وGoogle فيه. أبقِ `event-platform-dev` للتطوير والمعاينة وبيانات الاختبار.
-   أي Migration جديد يُطبَّق على dev أولًا ثم على prod.
+   أي Migration جديد يُطبَّق على dev أولًا ثم على prod. **خطوات النقل والتراجع التفصيلية: [`PRODUCTION-CUTOVER.md`](PRODUCTION-CUTOVER.md).**
 2. شغّل `supabase/tests/database.test.sql` و`supabase/tests/phases-6-8.test.sql` على قاعدة التطوير (يجب `failed=0`).
 3. اضبط `SUPABASE_SECRET_KEY` في Production و Preview (من لوحة Supabase، لا تلصقه في أي محادثة).
 4. عيّن أول مدير يدويًا عبر SQL Editor (انظر `docs/DATABASE.md`).
