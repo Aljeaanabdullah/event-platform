@@ -16,8 +16,20 @@
     (تُعرض فقط عند `SHOW_TEST_DATA=1` وخارج `VERCEL_ENV=production` — حماية مزدوجة).
   - الإحصائيات العامة (`get_platform_stats`) تستبعد بيانات الاختبار.
   - **لم يُنشأ أي حساب مدير** في هذه القاعدة؛ مسارات الإدارة والدفع تُختبر بـ SQL داخل معاملات تُلغى.
-- **المطلوب منك قبل الإطلاق:** إنشاء مشروع Supabase منفصل للإنتاج (قد يتطلب خطة مدفوعة حسب الاستخدام)،
-  تطبيق `supabase/migrations` عليه بالترتيب، ثم ربطه بـ Vercel Production فقط.
+- **تقدّم (2026-11-03):** أُنشئ مشروع إنتاج مستقل **`event-platform-prod`** (`dnmruaqryzqvfhhiltvq`،
+  eu-central-1، الخطة المجانية $0) وطُبّقت عليه كل ملفات `supabase/migrations` الـ12 بالترتيب. القاعدة فارغة
+  (لا مستخدمين ولا فعاليات ولا بيانات اختبار) — فقط التصنيفات الـ12 وإعدادات المنصة الافتراضية. RLS مفعّل على كل
+  الجداول، وتنبيهات Security Advisor مطابقة لقاعدة التطوير (دوال SECURITY DEFINER تتحقق من الصلاحية داخليًا).
+- **المتبقي — يحتاج موافقتك لأنه يغيّر إعدادات Production:**
+  1. في Vercel → Environment Variables (**Production فقط**): `NEXT_PUBLIC_SUPABASE_URL=https://dnmruaqryzqvfhhiltvq.supabase.co`
+     و`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` و`SUPABASE_SECRET_KEY` من لوحة المشروع الجديد. أبقِ Preview/Development
+     على `event-platform-dev`.
+  2. في المشروع الجديد: Authentication → URL Configuration (Site URL + Redirect URLs للنطاق الرسمي)، وتفعيل
+     Google Provider بنفس بيانات OAuth، وتفعيل Leaked Password Protection.
+  3. إعادة نشر Production. ⚠️ الموقع سيظهر فارغًا (لا فعاليات) والمستخدمون الحاليون في قاعدة التطوير لن ينتقلوا —
+     إن كان هناك مستخدمون حقيقيون فعلًا فالنقل يحتاج قرارًا منفصلًا.
+  4. تعيين أول مدير في المشروع الجديد يدويًا (انظر `docs/DATABASE.md`).
+- بعد التبديل يمكن إعادة السماح بالـ Migrations على قاعدة التطوير (البند 2b).
 - لحذف بيانات الاختبار في أي وقت: `node --env-file=.env.local scripts/seed-test-data.mjs --remove` ثم نفّذ الناتج
   في SQL Editor (يحذف فقط `is_test` ومستخدمي `e2e00000-*`).
 
