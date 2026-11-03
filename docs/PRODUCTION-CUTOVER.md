@@ -41,6 +41,18 @@
 
 ## 2) قبل البدء (يدويًا في لوحة `event-platform-prod`)
 
+### حالة بوابة المصادقة (فحص 2026-11-03 عبر `GET /auth/v1/settings` العام — بلا مفاتيح سرية)
+
+| الإعداد                          | prod                                      | dev       | ملاحظة                                                                |
+| -------------------------------- | ----------------------------------------- | --------- | --------------------------------------------------------------------- |
+| Email provider                   | مفعّل                                     | مفعّل     |                                                                       |
+| تأكيد البريد مطلوب (autoconfirm) | نعم                                       | نعم       | التسجيل يعتمد على وصول رسالة التأكيد ← يحتاج SMTP                     |
+| Google provider                  | **معطّل**                                 | **معطّل** | لم يُفعَّل في dev أيضًا: زر Google في Production الحالي لا يعمل أصلًا |
+| SMTP / Site URL / Redirect URLs  | لا يظهر في الـ API العام — يُؤكَّد يدويًا |           |                                                                       |
+
+**الشرط المتفق عليه:** لا تبدأ المرحلة A قبل إكمال البنود 1 و4 أدناه على الأقل (URL Configuration + SMTP).
+Google (البندان 2–3) مطلوب إن أردت تسجيل الدخول به عند الإطلاق، وليس تراجعًا عن الوضع الحالي.
+
 1. **Authentication → URL Configuration**
    - Site URL: `https://event-platform-one-fawn.vercel.app`
    - Redirect URLs:
@@ -70,9 +82,17 @@
 
 كود `main` (Phase 4) يعمل على المخطط الجديد لأنه مخطط أشمل (نفس الجداول + إضافات).
 
-1. Vercel → Project → **Storage / Integrations**: افصل مورد Supabase (dev) عن بيئة **Production** فقط
-   (أو احذف ربطه بالمشروع). تأكد أن المتغيرات المُدارة اختفت من Production.
-   - ⚠️ من هنا حتى الخطوة 3 لا تُنشر أي نسخة Production.
+1. افصل ربط تكامل Supabase بين مشروع **dev** ومشروع Vercel `event-platform`
+   (لوحة Supabase لمشروع `event-platform-dev` → Project Settings → Integrations → Vercel → إزالة الربط، أو Vercel →
+   Integrations → Supabase → Manage). **لا تُزِل تثبيت التكامل نفسه من الفريق.**
+   - أثر الفصل (مُتحقَّق منه): التكامل `icfg_iYRj…` (Supabase، `projectSelection: all`) أنشأ 16 متغيرًا **كلها لبيئة
+     Production فقط** في `event-platform`. Preview يستخدم متغيرين يدويين (غير مُدارين) يشيران إلى dev، وDevelopment
+     بلا متغيرات (التطوير المحلي يقرأ `.env.local` = dev)، ومشروع Vercel الآخر `codedclub` بلا أي متغيرات.
+     ⇐ الفصل لا يغيّر Preview ولا Development ولا `codedclub`.
+   - تحقّق بعده أن متغيرات Production المُدارة اختفت (وإن بقيت، احذف `NEXT_PUBLIC_SUPABASE_URL`
+     و`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` و`SUPABASE_SECRET_KEY` من Production فقط).
+   - ⚠️ من هنا حتى الخطوة 3 لا تُنشر أي نسخة Production (لا Push إلى `main`). الموقع الحالي يبقى يعمل لأن النشر
+     القائم يحتفظ بمتغيراته وقت بنائه.
 2. Vercel → Settings → Environment Variables → أضف لـ **Production فقط**:
    - `NEXT_PUBLIC_SUPABASE_URL` = `https://dnmruaqryzqvfhhiltvq.supabase.co`
    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` = المفتاح العام للمشروع الجديد
@@ -105,12 +125,27 @@
 
 ## 5) خطة التراجع (Rollback)
 
-| المشكلة                            | الإجراء                                                                                                                                                                                                                   |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| فشل البناء في المرحلة A أو B       | لا شيء ينكسر: Vercel يبقي النشر الحالي يعمل. صحّح وأعد المحاولة.                                                                                                                                                          |
-| الموقع لا يعمل بعد المرحلة A       | Deployments → `dpl_oqua2h3KYFCMR3WaRE1p2g1pjFqz` → **Instant Rollback** (يعود فورًا لنسخة مبنية على dev). ثم أعد ربط تكامل Supabase (dev) بـ Production واحذف المتغيرات الثلاثة اليدوية حتى لا يعيد النشر التالي التبديل. |
-| مشكلة بعد المرحلة B فقط (DB سليمة) | Instant Rollback إلى نشر المرحلة A (نفس قاعدة prod، كود `main` السابق)، ثم Revert لدمج PR #2 في GitHub.                                                                                                                   |
-| مشكلة في تسجيل الدخول فقط          | غالبًا URL Configuration أو Google redirect URI — صحّحها في اللوحة، لا حاجة لإعادة نشر.                                                                                                                                   |
+| المشكلة                            | الإجراء                                                                                                                      |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| فشل البناء في المرحلة A أو B       | لا شيء ينكسر: Vercel يبقي النشر الحالي يعمل. صحّح وأعد المحاولة.                                                             |
+| مشكلة في تسجيل الدخول فقط          | غالبًا URL Configuration أو Google redirect URI — صحّحها في اللوحة، لا حاجة لإعادة نشر.                                      |
+| مشكلة بعد المرحلة B فقط (DB سليمة) | Instant Rollback إلى نشر المرحلة A (نفس قاعدة prod، كود `main` السابق)، ثم Revert لدمج PR #2 في GitHub. المتغيرات لا تتغيّر. |
+| الموقع لا يعمل بعد المرحلة A       | التراجع الكامل أدناه (نشر + متغيرات + ربط Supabase).                                                                         |
+
+### التراجع الكامل للمرحلة A — بالترتيب
+
+1. **النشر (فوري):** Deployments → `dpl_oqua2h3KYFCMR3WaRE1p2g1pjFqz` → Instant Rollback. هذا النشر مبني على dev
+   ومتغيراته محفوظة معه، فيعود الموقع كما كان خلال ثوانٍ.
+   - بعد Instant Rollback يوقف Vercel الترقية التلقائية للنشرات الجديدة إلى Production حتى تُرقّي نشرًا يدويًا —
+     وهذا مفيد هنا: لا يُنشر شيء بالخطأ قبل إصلاح المتغيرات.
+2. **حالة البيانات قبل أي تغيير:** في prod: `select count(*) from auth.users;` و`select count(*) from public.orders;`.
+   إن وُجد مستخدمون أنشأوا حسابات خلال النافذة فهم لن يظهروا في dev — سجّل العدد، **لا تحذف** قاعدة prod.
+3. **المتغيرات:** احذف من Production فقط المتغيرات الثلاثة اليدوية (`NEXT_PUBLIC_SUPABASE_URL`,
+   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`).
+4. **ربط Supabase:** أعد ربط تكامل Supabase بين `event-platform-dev` ومشروع Vercel `event-platform`
+   (نفس مكان الخطوة A-1). تأكد أن المتغيرات المُدارة عادت لـ Production وأن Preview لم يتغيّر.
+5. **التحقق:** صفحة الموقع تعمل، وطلبات المتصفح تذهب إلى `cfzupsclmcpwgvumyvaq.supabase.co`.
+6. بعد ذلك فقط اسمح بنشرات Production جديدة (Promote/Undo Rollback).
 
 ملاحظات التراجع:
 
