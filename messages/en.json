@@ -531,7 +531,21 @@
     "upcoming": "Upcoming events",
     "noUpcoming": "No upcoming published events",
     "noUpcomingBody": "Create an event and submit it for review — it will appear here once approved.",
-    "soldOf": "{sold} / {total} sold"
+    "soldOf": "{sold} / {total} sold",
+    "logo": {
+      "title": "Organization logo",
+      "hint": "Shown on your organizer dashboard. JPEG, PNG, WebP or AVIF, up to 5 MB.",
+      "upload": "Upload logo",
+      "replace": "Change logo",
+      "remove": "Remove logo",
+      "uploading": "Uploading…",
+      "saved": "Logo saved",
+      "removed": "Logo removed",
+      "failed": "Couldn't save the logo, please try again",
+      "badType": "Unsupported file type. Use JPEG, PNG, WebP or AVIF.",
+      "tooLarge": "The image is larger than 5 MB.",
+      "alt": "{name} logo"
+    }
   },
   "OrganizerEvents": {
     "title": "My events",

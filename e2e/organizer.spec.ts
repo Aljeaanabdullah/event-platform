@@ -27,6 +27,36 @@ test("لوحة المنظّم تعرض أرقامًا حقيقية وفعالي�
   await expect(table).not.toContainText("Ahmadi Marathon (Test)");
 });
 
+test("شعار الجهة: رفع إلى مجلد الجهة، عرض، ثم إزالة", async ({ page }, info) => {
+  // يغيّر بيانات مشتركة (شعار جهة الاختبار) فيعمل على مشروع واحد فقط
+  test.skip(info.project.name !== "chromium", "يعدّل بيانات مشتركة");
+  await login(page, testUsers.organizer, "/en/organizer");
+  const card = page.getByTestId("organizer-logo");
+  await expect(card.getByRole("heading", { name: "Organization logo" })).toBeVisible();
+
+  await card
+    .getByTestId("logo-input")
+    .setInputFiles({ name: "logo.png", mimeType: "image/png", buffer: tinyPng });
+  await expect(page.getByText("Logo saved")).toBeVisible({ timeout: 20_000 });
+  const img = card.getByTestId("organizer-logo-image");
+  await expect(img).toBeVisible({ timeout: 20_000 });
+  // المسار داخل مجلد الجهة نفسها: event-media/{orgId}/logo/{uuid}.png
+  await expect(img).toHaveAttribute(
+    "src",
+    /event-media%2Fe2e00000-0000-4000-8000-0000000000a1%2Flogo%2F[0-9a-f-]{36}\.png/,
+  );
+
+  // ملف غير مدعوم يُرفض قبل الرفع
+  await card
+    .getByTestId("logo-input")
+    .setInputFiles({ name: "logo.svg", mimeType: "image/svg+xml", buffer: Buffer.from("<svg/>") });
+  await expect(page.getByText("Unsupported file type")).toBeVisible();
+
+  await card.getByRole("button", { name: "Remove logo" }).click();
+  await expect(page.getByText("Logo removed")).toBeVisible({ timeout: 20_000 });
+  await expect(card.getByTestId("organizer-logo-image")).toHaveCount(0);
+});
+
 test("لا يستطيع المنظّم فتح فعالية جهة أخرى، والعميل لا يصل لأدوات المنظّم أو الإدارة", async ({ page }) => {
   await login(page, testUsers.organizer, "/en/organizer");
   const res = await page.goto(`/en/organizer/events/${OTHER_ORG_EVENT}`);

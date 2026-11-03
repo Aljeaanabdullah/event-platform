@@ -17,6 +17,7 @@ import type { Metadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 
 import { PageHeader } from "@/components/account/section-card";
+import { LogoUploader } from "@/components/organizer/logo-uploader";
 import { EventStatusBadge, StatCard } from "@/components/organizer/status-badge";
 import { EmptyState } from "@/components/shared/states";
 import { Badge } from "@/components/ui/badge";
@@ -163,6 +164,13 @@ export default async function OrganizerPage({ params, searchParams }: PageProps<
           ))}
         </nav>
       ) : null}
+
+      <LogoUploader
+        key={current.organizerId}
+        organizerId={current.organizerId}
+        logoPath={current.logoPath}
+        orgName={orgName}
+      />
 
       {stats ? (
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-testid="organizer-stats">
