@@ -77,3 +77,20 @@ src/lib/         الأدوات المشتركة
 - **المشهد ثلاثي الأبعاد** (`src/components/three/`): تذكرة فوق منصة متوهجة مع حلقات وأشعة، بلا مكتبات معالجة لاحقة.
 - **الإحصائيات** من دالة `get_platform_stats` (أرقام حقيقية)، وتُعرض المزايا بدلها حتى تصل الفعاليات المنشورة إلى 10.
 - **معاينة التصميم ببيانات تجريبية** (للتطوير فقط، 404 في الإنتاج): `/ar/dev/home-preview` و `/en/dev/home-preview`.
+
+## المراحل 5–8 (فرع feature/phases-5-to-8)
+
+| المرحلة | ما يعمل فعلًا                                                                                                        | التوثيق                      |
+| ------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| 5       | بحث وفلاتر وترتيب وترقيم من قاعدة البيانات، صفحة الفعالية (خريطة، تقويم، مشاركة، مشابهة)، SEO و JSON-LD و sitemap    | [DATABASE](docs/DATABASE.md) |
+| 6       | لوحة المنظّم بأرقام فعلية، معالج إنشاء من 7 خطوات مع رفع الصور، مسودات، إرسال للمراجعة، مراجعة الإدارة               | [DATABASE](docs/DATABASE.md) |
+| 7       | حجز ذري مع حجز مؤقت 15 دقيقة، تذاكر QR، طباعة/PDF، التحقق بالكاميرا أو الرمز، اختبار تزامن حقيقي                     | [BOOKINGS](docs/BOOKINGS.md) |
+| 8       | Adapter دفع، مزوّد وهمي موقّع (Sandbox)، MyFatoorah (غير مُختبر بلا مفتاح)، Webhook/Callback، صفحات الحالة، العمولات | [PAYMENTS](docs/PAYMENTS.md) |
+
+الصفحات الجديدة: `/events`، `/events/[slug]`، `/organizer`، `/organizer/events`، `/organizer/events/new`،
+`/organizer/events/[id]`، `/organizer/check-in`، `/admin/events`، `/admin/organizers`، `/checkout/[orderId]`
+(+ `status|success|failed|cancelled`)، `/payments/mock/[paymentId]`، `/account/orders`، `/account/orders/[id]`،
+`/account/tickets`، `/account/tickets/[id]`، `/sitemap.xml`، `/robots.txt`.
+
+بيانات الاختبار المعزولة واختبارات E2E: `node --env-file=.env.local scripts/seed-test-data.mjs` (انظر `docs/DATABASE.md`).
+المشاكل المفتوحة والقرارات المطلوبة منك: [`BLOCKERS.md`](BLOCKERS.md). خطوات الإطلاق: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).

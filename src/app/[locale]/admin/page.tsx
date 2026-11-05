@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 
 import { PageHeader } from "@/components/account/section-card";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { requireAdmin } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
@@ -47,7 +49,14 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
           </li>
         ))}
       </ul>
-      <p className="mt-8 text-sm text-muted-foreground">{t("comingSoon")}</p>
+      <nav aria-label={t("sections")} className="mt-8 flex flex-wrap gap-3">
+        <Button asChild className="rounded-xl">
+          <Link href="/admin/events">{t("reviewEvents", { count: pendingEvents })}</Link>
+        </Button>
+        <Button asChild variant="outline" className="rounded-xl">
+          <Link href="/admin/organizers">{t("reviewOrganizers", { count: pendingOrganizers })}</Link>
+        </Button>
+      </nav>
     </div>
   );
 }

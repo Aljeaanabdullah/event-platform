@@ -43,13 +43,18 @@ test.describe("الثيم", () => {
       await page.goto("/ar");
       // على الجوال مبدّل الثيم داخل القائمة الجانبية
       const isMobile = (page.viewportSize()?.width ?? 1280) < 640;
-      if (isMobile) {
-        await page.getByRole("button", { name: "فتح القائمة" }).click();
-        await page.getByRole("dialog").getByTestId("theme-dark").click();
-      } else {
-        await page.getByRole("banner").getByTestId("theme-dark").click();
-      }
-      await expect(page.locator("html")).toHaveClass(/dark/);
+      // النقر قبل اكتمال الـ hydration لا يُشغّل المعالج (سلوك React الطبيعي) — نعيد المحاولة حتى يكتمل
+      await expect(async () => {
+        if (isMobile) {
+          if (!(await page.getByRole("dialog").isVisible())) {
+            await page.getByRole("button", { name: "فتح القائمة" }).click();
+          }
+          await page.getByRole("dialog").getByTestId("theme-dark").click();
+        } else {
+          await page.getByRole("banner").getByTestId("theme-dark").click();
+        }
+        await expect(page.locator("html")).toHaveClass(/dark/, { timeout: 1_000 });
+      }).toPass({ timeout: 15_000 });
 
       await page.reload();
       await expect(page.locator("html")).toHaveClass(/dark/);

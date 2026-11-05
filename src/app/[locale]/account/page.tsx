@@ -40,7 +40,19 @@ export default async function AccountPage({ params }: PageProps<"/[locale]/accou
         subtitle={t("memberSince", {
           date: format.dateTime(new Date(user.profile.created_at), { dateStyle: "long" }),
         })}
-      />
+      >
+        <nav aria-label={t("quickLinks")} className="flex flex-wrap gap-2">
+          <Button asChild className="rounded-xl bg-gradient-neon font-semibold text-white">
+            <Link href="/account/tickets">
+              <Ticket aria-hidden />
+              {t("myTickets")}
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="glass rounded-xl">
+            <Link href="/account/orders">{t("myOrders")}</Link>
+          </Button>
+        </nav>
+      </PageHeader>
 
       <div className="grid gap-6">
         <SectionCard id="role" title={t("role.title")}>

@@ -24,6 +24,7 @@ export type Membership = {
   nameEn: string;
   status: OrganizerStatus;
   rejectionReason: string | null;
+  logoPath: string | null;
 };
 
 export type UserContext = {
@@ -55,7 +56,7 @@ export const getUserContext = cache(async (): Promise<UserContext | null> => {
     supabase.from("profiles").select("*").eq("id", claims.sub).single(),
     supabase
       .from("organizer_members")
-      .select("role, organizer_id, organizers (slug, name_ar, name_en, status, rejection_reason)")
+      .select("role, organizer_id, organizers (slug, name_ar, name_en, status, rejection_reason, logo_path)")
       .eq("user_id", claims.sub),
   ]);
   if (!profile) return null;
@@ -71,6 +72,7 @@ export const getUserContext = cache(async (): Promise<UserContext | null> => {
             nameEn: m.organizers.name_en,
             status: m.organizers.status,
             rejectionReason: m.organizers.rejection_reason,
+            logoPath: m.organizers.logo_path,
           },
         ]
       : [],

@@ -15,7 +15,7 @@ import { routing } from "./i18n/routing";
  */
 const handleI18nRouting = createMiddleware(routing);
 
-const PROTECTED = ["/account", "/organizer", "/admin"];
+const PROTECTED = ["/account", "/organizer", "/admin", "/checkout"];
 // صفحات لا معنى لها للمستخدم المسجّل
 const GUEST_ONLY = ["/login", "/register", "/forgot-password"];
 

@@ -148,7 +148,8 @@
       "available": "Tickets available",
       "sold_out": "Sold out",
       "cancelled": "Cancelled",
-      "ended": "Ended"
+      "ended": "Ended",
+      "no_tickets": "Tickets not available yet"
     },
     "byOrganizer": "By {name}",
     "bookNow": "Book now",
@@ -162,7 +163,38 @@
     "activeFilters": "Filters",
     "clearFilters": "Clear filters",
     "emptyTitle": "No matching events",
-    "emptyDescription": "We couldn't find published events matching your search right now. Try different filters or check back later."
+    "emptyDescription": "We couldn't find published events matching your search right now. Try different filters or check back later.",
+    "searchLabel": "Search events",
+    "searchPlaceholder": "Search by event name, description, organizer or venue…",
+    "searchButton": "Search",
+    "filtersLegend": "Filters",
+    "filter": {
+      "category": "Category",
+      "area": "Governorate",
+      "date": "When",
+      "day": "Specific day",
+      "price": "Price",
+      "sort": "Sort by",
+      "all": "All categories",
+      "allAreas": "All governorates",
+      "anyPrice": "Any price",
+      "free": "Free",
+      "paid": "Paid"
+    },
+    "sort": {
+      "date": "Soonest first",
+      "price-asc": "Price: low to high",
+      "price-desc": "Price: high to low",
+      "newest": "Newest"
+    },
+    "resultsCount": "{count, plural, =0 {No results} one {# event} other {# events}}",
+    "removeFilter": "Remove {name}",
+    "noEventsTitle": "No published events yet",
+    "noEventsDescription": "New events will appear here as soon as our team approves them.",
+    "pagination": "Pagination",
+    "prevPage": "Previous",
+    "nextPage": "Next",
+    "pageOf": "Page {page} of {count}"
   },
   "Footer": {
     "tagline": "Discover and book the best events in Kuwait and the Gulf.",
@@ -302,7 +334,9 @@
     "becomeOrganizer": "Become an organizer",
     "admin": "Admin dashboard",
     "signOut": "Sign out",
-    "greeting": "Hi, {name}"
+    "greeting": "Hi, {name}",
+    "tickets": "My tickets",
+    "orders": "My orders"
   },
   "Account": {
     "title": "My account",
@@ -348,7 +382,10 @@
       "title": "Do you organize events?",
       "body": "Apply as an organizer to publish events and sell tickets after review.",
       "button": "Apply now"
-    }
+    },
+    "quickLinks": "Quick links",
+    "myTickets": "My tickets",
+    "myOrders": "My orders"
   },
   "Organizer": {
     "title": "Organizer",
@@ -397,7 +434,10 @@
       "pendingEvents": "Events awaiting review",
       "publishedEvents": "Published events"
     },
-    "comingSoon": "Review tools and financial reports are added in Phase 9."
+    "comingSoon": "Review tools and financial reports are added in Phase 9.",
+    "sections": "Admin sections",
+    "reviewEvents": "Review events ({count})",
+    "reviewOrganizers": "Organizer applications ({count})"
   },
   "CategoriesShort": {
     "conferences": "Conferences",
@@ -430,5 +470,408 @@
     "featurePayments": "Secure KNET & card payments",
     "featureTickets": "Instant QR tickets on your phone",
     "featureBilingual": "Full Arabic & English experience"
+  },
+  "EventDetails": {
+    "date": "Date",
+    "time": "Time",
+    "kuwaitTime": "Kuwait time",
+    "location": "Location",
+    "online": "Online event",
+    "locationTba": "Venue to be announced",
+    "about": "About this event",
+    "gallery": "Gallery",
+    "map": "Map",
+    "mapTitle": "Map of {place}",
+    "openInMaps": "Open in Google Maps",
+    "tickets": "Tickets",
+    "noTickets": "The organizer hasn't set up tickets yet.",
+    "seatsLeft": "{count, plural, =0 {Sold out} one {# seat left} other {# seats left}}",
+    "salesStart": "Sales start {date}",
+    "ticketState": {
+      "on_sale": "On sale",
+      "sold_out": "Sold out",
+      "not_started": "Not on sale yet",
+      "ended": "Sales ended"
+    },
+    "cancelledTitle": "This event was cancelled",
+    "share": "Share",
+    "linkCopied": "Link copied",
+    "copyFailed": "Couldn't copy the link",
+    "addToCalendar": "Add to calendar",
+    "googleCalendar": "Google Calendar",
+    "similar": "Similar events"
+  },
+  "EventStatus": {
+    "draft": "Draft",
+    "pending_review": "Under review",
+    "published": "Published",
+    "rejected": "Rejected",
+    "cancelled": "Cancelled"
+  },
+  "OrganizerDashboard": {
+    "title": "{name} dashboard",
+    "subtitle": "Live numbers from real bookings and sales",
+    "newEvent": "Add event",
+    "manageEvents": "Manage events & tickets",
+    "checkIn": "Ticket check-in",
+    "switchOrg": "Choose organization",
+    "loadError": "Couldn't load the numbers. Please try again.",
+    "stats": {
+      "eventsTotal": "Total events",
+      "published": "Published events",
+      "pending": "Under review",
+      "bookings": "Confirmed bookings",
+      "ticketsSold": "Tickets sold",
+      "gross": "Gross sales",
+      "commission": "Platform commission",
+      "commissionHint": "Deducted from your share at your organization's rate",
+      "net": "Your net earnings",
+      "netHint": "Before payment gateway fees and refunds"
+    },
+    "upcoming": "Upcoming events",
+    "noUpcoming": "No upcoming published events",
+    "noUpcomingBody": "Create an event and submit it for review — it will appear here once approved.",
+    "soldOf": "{sold} / {total} sold",
+    "logo": {
+      "title": "Organization logo",
+      "hint": "Shown on your organizer dashboard. JPEG, PNG, WebP or AVIF, up to 5 MB.",
+      "upload": "Upload logo",
+      "replace": "Change logo",
+      "remove": "Remove logo",
+      "uploading": "Uploading…",
+      "saved": "Logo saved",
+      "removed": "Logo removed",
+      "failed": "Couldn't save the logo, please try again",
+      "badType": "Unsupported file type. Use JPEG, PNG, WebP or AVIF.",
+      "tooLarge": "The image is larger than 5 MB.",
+      "alt": "{name} logo"
+    }
+  },
+  "OrganizerEvents": {
+    "title": "My events",
+    "new": "New event",
+    "emptyTitle": "No events yet",
+    "emptyBody": "Start by creating your organization's first event.",
+    "col": {
+      "event": "Event",
+      "status": "Status",
+      "sold": "Sold",
+      "gross": "Sales",
+      "net": "Net",
+      "actions": "Actions"
+    },
+    "edit": "Edit",
+    "view": "View",
+    "publicPage": "Public page",
+    "checkIn": "Ticket check-in",
+    "withdraw": "Withdraw from review",
+    "withdrawn": "Event moved back to draft",
+    "deleteDraft": "Delete draft",
+    "confirmDelete": "Permanently delete this draft?",
+    "deleted": "Draft deleted",
+    "actionFailed": "Couldn't complete the action",
+    "rejectedTitle": "This event was rejected — you can edit and resubmit it",
+    "pendingBody": "This event is awaiting review by the platform team. Withdraw it to make changes.",
+    "lockedBody": "Published events can't be edited here. These are its actual sales.",
+    "reserved": "{count} on hold",
+    "checkedIn": "Checked in",
+    "commission": "Platform commission"
+  },
+  "EventForm": {
+    "newTitle": "New event",
+    "stepsLabel": "Event creation steps",
+    "steps": {
+      "info": "Event details",
+      "images": "Images",
+      "schedule": "Date & time",
+      "location": "Location",
+      "tickets": "Tickets & prices",
+      "preview": "Preview",
+      "submit": "Submit for review"
+    },
+    "fields": {
+      "category": "Category",
+      "titleAr": "Title (Arabic)",
+      "titleEn": "Title (English)",
+      "summaryAr": "Short summary (Arabic)",
+      "summaryEn": "Short summary (English)",
+      "descriptionAr": "Description (Arabic)",
+      "descriptionEn": "Description (English)",
+      "startsAt": "Starts",
+      "endsAt": "Ends",
+      "isOnline": "Online event",
+      "governorate": "Governorate",
+      "area": "Area",
+      "venueAr": "Venue name (Arabic)",
+      "venueEn": "Venue name (English)",
+      "addressAr": "Address (Arabic)",
+      "addressEn": "Address (English)",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "ticketNameAr": "Ticket name (Arabic)",
+      "ticketNameEn": "Ticket name (English)",
+      "price": "Price (KWD)",
+      "quantity": "Quantity",
+      "maxPerOrder": "Max per order"
+    },
+    "optional": "Optional",
+    "kuwaitTimeHint": "Kuwait time",
+    "chooseGovernorate": "Choose a governorate",
+    "coordinatesHint": "Optional: shows a precise map (e.g. 29.3897)",
+    "ticketsHint": "Add one or more types. A price of 0 means a free ticket.",
+    "priceHint": "Up to 3 decimals, e.g. 7.500",
+    "addTicket": "Add ticket type",
+    "removeTicket": "Remove",
+    "ticketLockedHint": "Has bookings and can't be removed",
+    "totalCapacity": "Total capacity (max attendees): {count}",
+    "untitled": "Untitled",
+    "submitIntro": "Before submitting, make sure the following are complete. The platform team will review your event and notify you of the result.",
+    "ready": {
+      "eventInPast": "Start time is in the future",
+      "locationRequired": "Governorate set (or the event is online)",
+      "ticketsRequired": "At least one ticket type"
+    },
+    "readyOk": "Complete",
+    "readyMissing": "Incomplete",
+    "submitForReview": "Submit for review",
+    "saveDraft": "Save draft",
+    "saving": "Saving…",
+    "back": "Back",
+    "next": "Next",
+    "draftSaved": "Draft saved",
+    "submitted": "Event submitted for review",
+    "fixErrors": "Please fix the highlighted fields",
+    "images": {
+      "add": "Upload images",
+      "hint": "Up to {max} images (JPEG, PNG or WebP, 5MB each). The first is the cover.",
+      "cover": "Cover",
+      "makeCover": "Make cover",
+      "remove": "Remove image",
+      "uploading": "Uploading",
+      "uploadFailed": "Couldn't upload the image",
+      "badType": "Unsupported type: {name}",
+      "tooLarge": "Larger than 5MB: {name}"
+    },
+    "errors": {
+      "required": "This field is required",
+      "tooLong": "Text is too long",
+      "titleTooShort": "Title is too short (at least 3 characters)",
+      "dateInvalid": "Enter a valid date and time",
+      "endBeforeStart": "End must be after the start",
+      "priceInvalid": "Invalid price (e.g. 7.500)",
+      "quantityInvalid": "Enter a positive whole number",
+      "maxPerOrderInvalid": "Between 1 and 50",
+      "maxPerOrderAboveQuantity": "Can't exceed the quantity",
+      "coordinateInvalid": "Invalid coordinate",
+      "coordinatesPair": "Enter both latitude and longitude",
+      "tooManyImages": "Too many images",
+      "tooManyTickets": "Too many ticket types"
+    },
+    "saveErrors": {
+      "invalidInput": "Some data is invalid",
+      "sessionExpired": "Your session expired — please sign in again",
+      "forbidden": "You're not allowed to manage this organization's events",
+      "notEditable": "This event can't be edited in its current status",
+      "notReady": "The event isn't ready to submit:",
+      "ticketLocked": "A ticket type with bookings can't be removed or reduced",
+      "generic": "Something went wrong — please try again"
+    }
+  },
+  "AdminReview": {
+    "eventsTitle": "Event review",
+    "eventsSubtitle": "Approve events or reject them with a reason",
+    "organizersTitle": "Organizer applications",
+    "organizersSubtitle": "Approve or reject organizations",
+    "filterLabel": "Filter by status",
+    "emptyTitle": "Nothing here",
+    "emptyBody": "There's nothing with this status right now.",
+    "details": "Details",
+    "online": "Online",
+    "testData": "Test data",
+    "approve": "Approve & publish",
+    "reject": "Reject",
+    "reasonLabel": "Rejection reason (shown to the organizer)",
+    "confirmReject": "Confirm rejection",
+    "cancel": "Cancel",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "reasonShown": "Rejection reason: {reason}",
+    "auditTitle": "Recent actions (audit log)",
+    "auditEmpty": "No actions yet",
+    "errors": {
+      "forbidden": "Not authorized",
+      "reasonRequired": "A rejection reason is required",
+      "notFound": "This item is no longer awaiting review",
+      "invalidInput": "Invalid input",
+      "generic": "Something went wrong — please try again"
+    }
+  },
+  "Booking": {
+    "book": "Book now",
+    "reserving": "Reserving…",
+    "estimate": "Estimated total",
+    "holdNote": "Tickets are held for you for 15 minutes to complete payment. The final amount is calculated on the server.",
+    "quantityFor": "{name} quantity",
+    "increase": "Increase {name}",
+    "decrease": "Decrease {name}",
+    "errors": {
+      "authRequired": "Please sign in first",
+      "invalidItems": "Invalid selection",
+      "eventNotOnSale": "This event isn't available for booking",
+      "tooManyPending": "You have too many pending bookings. Pay for or cancel them first",
+      "ticketNotOnSale": "This ticket type isn't on sale right now",
+      "invalidQuantity": "Quantity is outside the allowed range per order",
+      "soldOut": "Sorry, the requested quantity is no longer available",
+      "generic": "Couldn't complete the booking — please try again"
+    }
+  },
+  "Checkout": {
+    "title": "Complete your booking",
+    "subtitle": "Review your order before paying",
+    "holdLeft": "Your tickets are held for {time}",
+    "holdExpired": "The hold has expired — tickets may be released",
+    "paymentTitle": "Payment",
+    "paymentPending": "Online payment is available below.",
+    "cancel": "Cancel booking",
+    "cancelled": "Booking cancelled and tickets released",
+    "cancelFailed": "Couldn't cancel"
+  },
+  "Orders": {
+    "title": "My orders",
+    "subtitle": "All your bookings and their payment status",
+    "emptyTitle": "No orders yet",
+    "emptyBody": "Book your first ticket from the events page.",
+    "browse": "Browse events",
+    "detailTitle": "Order details",
+    "orderNumber": "Order number",
+    "items": "Order items",
+    "subtotal": "Subtotal",
+    "serviceFee": "Service fee",
+    "total": "Total",
+    "confirmed": "Your booking is confirmed! Your tickets are below.",
+    "needsRefund": "Payment arrived after the hold expired and the tickets were no longer available — it will be refunded.",
+    "ticketsTitle": "{count, plural, one {# ticket} other {# tickets}}",
+    "showQr": "Show QR code",
+    "status": {
+      "pending_payment": "Awaiting payment",
+      "paid": "Confirmed",
+      "expired": "Expired",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded",
+      "partially_refunded": "Partially refunded",
+      "needs_refund": "Needs refund"
+    }
+  },
+  "Tickets": {
+    "title": "My tickets",
+    "subtitle": "Show the QR code at the entrance",
+    "emptyTitle": "No tickets yet",
+    "emptyBody": "Confirmed tickets appear here, each with its own QR code.",
+    "browse": "Browse events",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "qrLabel": "Entry QR code",
+    "qrHint": "Unique and secret — don't share it",
+    "usedAt": "Used at entry {date}",
+    "voided": "This ticket has been voided",
+    "date": "When",
+    "venue": "Venue",
+    "order": "Order",
+    "online": "Online",
+    "print": "Print / save as PDF",
+    "eventPage": "Event page",
+    "status": {
+      "valid": "Valid",
+      "checked_in": "Used",
+      "void": "Void"
+    }
+  },
+  "CheckIn": {
+    "title": "Ticket check-in",
+    "subtitle": "Scan the QR code or enter the printed ticket code",
+    "chooseEvent": "Choose the event",
+    "selectFirst": "Choose an event to start scanning.",
+    "noEvents": "No current published events",
+    "noEventsBody": "Your organization's upcoming or ongoing published events appear here.",
+    "startCamera": "Start camera",
+    "stopCamera": "Stop camera",
+    "starting": "Starting camera",
+    "cameraOff": "Start the camera and point it at a QR code",
+    "cameraDenied": "Camera access was denied. Use manual entry or allow the camera in your browser settings.",
+    "cameraUnsupported": "This browser doesn't support the camera. Use manual entry.",
+    "manualLabel": "Ticket code",
+    "check": "Check",
+    "checking": "Checking…",
+    "next": "Next ticket",
+    "usedAt": "Checked in {date}",
+    "result": {
+      "ok": "Entry allowed ✓",
+      "already_used": "Already used",
+      "wrong_event": "Ticket for another event",
+      "void": "Voided ticket",
+      "invalid": "Invalid ticket",
+      "error": "Couldn't verify — please try again"
+    }
+  },
+  "Payment": {
+    "payNow": "Pay {amount}",
+    "sandboxNote": "Sandbox environment — no real money will be charged.",
+    "hostedNote": "Payment happens on the payment provider's secure page. We never receive or store your card details.",
+    "notConfigured": "Online payment isn't enabled in this environment yet. You can cancel the booking or come back later.",
+    "lastFailed": "Your previous payment attempt didn't go through. You can try again before the hold expires.",
+    "startErrors": {
+      "notConfigured": "Payments aren't enabled right now",
+      "notPayable": "This order can't be paid (the hold may have expired)",
+      "tooManyAttempts": "Too many payment attempts for this order",
+      "sessionExpired": "Your session expired — please sign in again",
+      "providerError": "Couldn't reach the payment provider — please try again"
+    },
+    "mock": {
+      "bannerTitle": "Mock payment provider for testing",
+      "bannerBody": "This isn't a real payment gateway and never asks for card details. Choose an outcome to simulate.",
+      "title": "Test payment",
+      "order": "Order number",
+      "amount": "Amount",
+      "succeed": "Simulate successful payment",
+      "fail": "Simulate failed payment",
+      "cancel": "Simulate cancelled payment",
+      "alreadyHandled": "This payment has already been processed.",
+      "backToCheckout": "Back to checkout",
+      "errors": {
+        "disabled": "The mock provider is disabled in this environment",
+        "notFound": "Payment not found",
+        "serverKeyMissing": "Can't process: the server key SUPABASE_SECRET_KEY isn't set in this environment.",
+        "failed": "Couldn't process the payment"
+      }
+    },
+    "status": {
+      "viewTickets": "View tickets",
+      "tryAgain": "Try paying again",
+      "backToEvent": "Back to event",
+      "success": {
+        "title": "Payment successful",
+        "body": "Your booking is confirmed and your tickets are issued. You'll also find them under My tickets."
+      },
+      "failed": {
+        "title": "Payment failed",
+        "body": "No money was taken and no tickets were issued. You can try again while your hold is active."
+      },
+      "cancelled": {
+        "title": "Payment cancelled",
+        "body": "You cancelled the payment. Your booking stays on hold until it expires."
+      },
+      "processing": {
+        "title": "Confirming payment…",
+        "body": "Waiting for a trusted confirmation from the payment provider. This page refreshes automatically."
+      },
+      "expired": {
+        "title": "Booking expired",
+        "body": "The hold expired or the order was cancelled. You can book again if tickets are still available."
+      },
+      "refund": {
+        "title": "Your payment will be refunded",
+        "body": "Payment arrived after the hold expired and the tickets were no longer available. It will be refunded."
+      }
+    }
   }
 }
