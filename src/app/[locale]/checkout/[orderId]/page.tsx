@@ -55,7 +55,11 @@ export default async function CheckoutPage({ params }: PageProps<"/[locale]/chec
                 {tPay("sandboxNote")}
               </p>
             ) : null}
-            <PayButton orderId={order.id} amountLabel={formatMoney(Number(order.total_fils), locale)} />
+            <PayButton
+              orderId={order.id}
+              amountLabel={formatMoney(Number(order.total_fils), locale)}
+              provider={provider.name}
+            />
             <p className="flex items-center gap-2 text-xs text-muted-foreground">
               <ShieldCheck className="size-4" aria-hidden />
               {tPay("hostedNote")}

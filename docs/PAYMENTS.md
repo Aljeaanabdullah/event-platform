@@ -16,6 +16,15 @@
 **لماذا MyFatoorah؟** مزوّد كويتي يدعم KNET والبطاقات، بيئة اختبار عامة (`apitest.myfatoorah.com`)، صفحة دفع مستضافة
 (فلا نلمس بيانات البطاقة)، و"Multi-Vendor/Suppliers" لتوزيع المبالغ على عدة منظّمين مستقبلًا.
 
+## Edge Functions (مسار MyFatoorah الحالي)
+
+زر الدفع يستدعي Edge Functions عندما يكون المزوّد MyFatoorah، ويبقى مسار Next.js أدناه للمزوّد الوهمي:
+
+- `supabase/functions/initiate-payment`: يقرأ رقم الطلب واللغة فقط، ويأخذ المبلغ من `start_order_payment`، ويرجع رابط الدفع.
+- `supabase/functions/payment-webhook`: يستقبل Webhook (POST) وعودة المتصفح (GET). لا يثق بمحتواهما: يسأل `GetPaymentStatus` ثم يؤكد عبر `confirm_order_payment`. مفتاح منع التكرار `invoice:{id}:{status}` يُبنى بعد التحقق.
+
+منشورتان على `event-platform-dev` فقط. تحتاجان Supabase Secret باسم `MYFATOORAH_API_KEY` (و`MYFATOORAH_BASE_URL` اختياري، والافتراضي البيئة التجريبية). رابط الـ Webhook: `https://cfzupsclmcpwgvumyvaq.supabase.co/functions/v1/payment-webhook`.
+
 ## المسار
 
 ```
