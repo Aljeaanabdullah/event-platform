@@ -437,7 +437,8 @@
     "comingSoon": "Review tools and financial reports are added in Phase 9.",
     "sections": "Admin sections",
     "reviewEvents": "Review events ({count})",
-    "reviewOrganizers": "Organizer applications ({count})"
+    "reviewOrganizers": "Organizer applications ({count})",
+    "payments": "Payments"
   },
   "CategoriesShort": {
     "conferences": "Conferences",
@@ -872,6 +873,22 @@
         "title": "Your payment will be refunded",
         "body": "Payment arrived after the hold expired and the tickets were no longer available. It will be refunded."
       }
+    }
+  },
+  "AdminPayments": {
+    "title": "Payments",
+    "subtitle": "Payment status for each order, updated live",
+    "emptyTitle": "No orders yet",
+    "emptyBody": "Orders will appear here as soon as they are created.",
+    "reason": "Reason: {reason}",
+    "states": {
+      "pending": "Not started",
+      "awaiting_payment": "Awaiting payment",
+      "paid": "Paid",
+      "failed": "Failed",
+      "expired": "Expired",
+      "cancelled": "Cancelled",
+      "refund": "Refund"
     }
   }
 }

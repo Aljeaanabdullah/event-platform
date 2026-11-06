@@ -56,6 +56,9 @@ export default async function AdminPage({ params }: PageProps<"/[locale]/admin">
         <Button asChild variant="outline" className="rounded-xl">
           <Link href="/admin/organizers">{t("reviewOrganizers", { count: pendingOrganizers })}</Link>
         </Button>
+        <Button asChild variant="outline" className="rounded-xl">
+          <Link href="/admin/payments">{t("payments")}</Link>
+        </Button>
       </nav>
     </div>
   );

@@ -437,7 +437,8 @@
     "comingSoon": "أدوات المراجعة والتقارير المالية تُضاف في المرحلة 9.",
     "sections": "أقسام الإدارة",
     "reviewEvents": "مراجعة الفعاليات ({count})",
-    "reviewOrganizers": "طلبات المنظّمين ({count})"
+    "reviewOrganizers": "طلبات المنظّمين ({count})",
+    "payments": "المدفوعات"
   },
   "CategoriesShort": {
     "conferences": "مؤتمرات",
@@ -872,6 +873,22 @@
         "title": "سيُسترجع المبلغ",
         "body": "وصل الدفع بعد انتهاء الحجز ولم تعد التذاكر متاحة. سيُعاد المبلغ إليك."
       }
+    }
+  },
+  "AdminPayments": {
+    "title": "المدفوعات",
+    "subtitle": "حالة الدفع لكل طلب، وتتحدث مباشرة",
+    "emptyTitle": "لا توجد طلبات بعد",
+    "emptyBody": "ستظهر الطلبات هنا فور إنشائها.",
+    "reason": "السبب: {reason}",
+    "states": {
+      "pending": "لم يبدأ الدفع",
+      "awaiting_payment": "بانتظار الدفع",
+      "paid": "مدفوع",
+      "failed": "فشل الدفع",
+      "expired": "منتهي",
+      "cancelled": "ملغى",
+      "refund": "استرجاع"
     }
   }
 }

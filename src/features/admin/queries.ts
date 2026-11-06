@@ -20,6 +20,20 @@ export async function listEventsForReview(status: "pending_review" | "rejected" 
   return data ?? [];
 }
 
+/** آخر الطلبات مع محاولات دفعها (RLS: المدير يرى كل الطلبات) */
+export async function listOrdersWithPayments() {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("orders")
+    .select(
+      "id, order_number, status, total_fils, created_at, events (title_ar, title_en), payments (status, failure_reason, created_at)",
+    )
+    .order("created_at", { ascending: false })
+    .limit(100);
+  if (error) logger.error("list orders with payments failed", error, { code: error.code });
+  return data ?? [];
+}
+
 export async function listOrganizerApplications() {
   const supabase = await createClient();
   const { data, error } = await supabase
