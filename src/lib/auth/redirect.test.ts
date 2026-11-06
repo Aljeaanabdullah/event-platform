@@ -22,12 +22,12 @@ describe("safeRedirectPath — الحماية من Open Redirect", () => {
       null,
       undefined,
     ]) {
-      expect(safeRedirectPath(bad, "ar")).toBe("/ar/account");
+      expect(safeRedirectPath(bad, "ar")).toBe("/ar");
     }
   });
 
   it("يستخدم لغة الصفحة في المسار الافتراضي", () => {
-    expect(safeRedirectPath(null, "en")).toBe("/en/account");
+    expect(safeRedirectPath(null, "en")).toBe("/en");
   });
 });
 

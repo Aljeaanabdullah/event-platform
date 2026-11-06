@@ -5,7 +5,8 @@
  * لا تُستخدم لاتخاذ قرارات صلاحيات — تلك على الخادم وفي RLS.
  * نقرأها في المتصفح حتى تبقى الصفحات العامة ثابتة (Static) وسريعة.
  */
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import { getBrowserClient } from "@/lib/supabase/client";
 
@@ -38,55 +39,66 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   );
   const [favorites, setFavorites] = useState<ReadonlySet<string>>(new Set());
 
-  useEffect(() => {
-    let cancelled = false;
+  // المستخدم المعروض حاليًا: undefined قبل أول قراءة، null للزائر
+  const loadedUserId = useRef<string | null | undefined>(undefined);
+  const loadSeq = useRef(0);
+
+  const load = useCallback(async (force = false) => {
     const supabase = getBrowserClient();
     if (!supabase) return;
-
-    async function load() {
-      if (!supabase) return;
-      const { data } = await supabase.auth.getClaims();
-      const userId = data?.claims?.sub;
-      if (!userId) {
-        if (!cancelled) {
-          setState({ status: "anonymous" });
-          setFavorites(new Set());
-        }
-        return;
-      }
-      const [{ data: profile }, { count }, { data: favs }] = await Promise.all([
-        supabase
-          .from("profiles")
-          .select("full_name, email, avatar_url, platform_role")
-          .eq("id", userId)
-          .single(),
-        supabase.from("organizer_members").select("id", { count: "exact", head: true }).eq("user_id", userId),
-        supabase.from("favorites").select("event_id").eq("user_id", userId),
-      ]);
-      if (cancelled) return;
-      setFavorites(new Set((favs ?? []).map((f) => f.event_id)));
-      setState({
-        status: "authenticated",
-        user: {
-          id: userId,
-          name: profile?.full_name ?? null,
-          email: profile?.email ?? (data.claims.email as string | undefined) ?? null,
-          avatarUrl: profile?.avatar_url ?? null,
-          isAdmin: profile?.platform_role === "admin",
-          isOrganizerMember: (count ?? 0) > 0,
-        },
-      });
+    const seq = ++loadSeq.current;
+    const { data } = await supabase.auth.getClaims();
+    if (seq !== loadSeq.current) return;
+    const userId = data?.claims?.sub ?? null;
+    if (!force && userId === loadedUserId.current) return;
+    if (!userId) {
+      loadedUserId.current = null;
+      setState({ status: "anonymous" });
+      setFavorites(new Set());
+      return;
     }
+    const [{ data: profile }, { count }, { data: favs }] = await Promise.all([
+      supabase
+        .from("profiles")
+        .select("full_name, email, avatar_url, platform_role")
+        .eq("id", userId)
+        .single(),
+      supabase.from("organizer_members").select("id", { count: "exact", head: true }).eq("user_id", userId),
+      supabase.from("favorites").select("event_id").eq("user_id", userId),
+    ]);
+    if (seq !== loadSeq.current) return;
+    loadedUserId.current = userId;
+    setFavorites(new Set((favs ?? []).map((f) => f.event_id)));
+    setState({
+      status: "authenticated",
+      user: {
+        id: userId,
+        name: profile?.full_name ?? null,
+        email: profile?.email ?? (data?.claims?.email as string | undefined) ?? null,
+        avatarUrl: profile?.avatar_url ?? null,
+        isAdmin: profile?.platform_role === "admin",
+        isOrganizerMember: (count ?? 0) > 0,
+      },
+    });
+  }, []);
 
-    load();
+  useEffect(() => {
+    const supabase = getBrowserClient();
+    if (!supabase) return;
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "USER_UPDATED") load();
+      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "USER_UPDATED") load(true);
     });
     return () => {
-      cancelled = true;
       sub.subscription.unsubscribe();
     };
-  }, []);
+  }, [load]);
+
+  // الدخول يتم في Server Action دون إعادة تحميل الصفحة، فلا يصل onAuthStateChange للمتصفح:
+  // نعيد قراءة الجلسة عند كل تنقّل (الاستعلامات لا تتكرر إلا إذا تغيّر المستخدم).
+  const pathname = usePathname();
+  useEffect(() => {
+    queueMicrotask(() => void load());
+  }, [load, pathname]);
 
   const userId = state.status === "authenticated" ? state.user.id : null;
 

@@ -5,7 +5,7 @@ import { routing, type Locale } from "@/i18n/routing";
  * يُقبل فقط مسار داخلي يبدأ بلغة مدعومة، وإلا نعود للمسار الافتراضي.
  */
 export function safeRedirectPath(next: string | null | undefined, locale: Locale): string {
-  const fallback = `/${locale}/account`;
+  const fallback = `/${locale}`;
   if (!next || typeof next !== "string") return fallback;
   if (next.length > 512) return fallback;
   // يرفض: روابط خارجية، //evil.com، /\evil.com، والمحارف غير المرئية

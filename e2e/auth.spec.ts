@@ -40,6 +40,22 @@ test.describe("حماية المسارات", () => {
   });
 });
 
+test("بعد الدخول: يتحوّل للرئيسية ويظهر حساب المستخدم في الـ Header دون إعادة تحميل", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!process.env.E2E_TEST_PASSWORD, "E2E_TEST_PASSWORD غير مضبوط");
+  test.skip(isMobile, "قائمة الحساب في الجوال داخل القائمة الجانبية");
+  await page.goto("/en/login");
+  await expect(page.getByTestId("header-login")).toBeVisible();
+  await page.getByLabel("Email").fill("e2e-customer@example.test");
+  await page.getByLabel("Password", { exact: true }).fill(process.env.E2E_TEST_PASSWORD!);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page).toHaveURL(/\/en$/, { timeout: 20_000 });
+  await expect(page.getByTestId("user-menu")).toBeVisible();
+  await expect(page.getByTestId("header-login")).toHaveCount(0);
+});
+
 test.describe("صفحات المصادقة", () => {
   test("الدخول بالعربية: زر Google والتحقق من الحقول", async ({ page }) => {
     await page.goto("/ar/login");
@@ -185,9 +201,9 @@ test.describe("دورة حياة الحساب الحقيقية", () => {
     await page.reload();
     await expect(page.getByLabel("Full name")).toHaveValue("E2E Renamed");
 
-    // صفحات الضيوف تحوّل المسجّل لحسابه
+    // صفحات الضيوف تحوّل المسجّل للصفحة الرئيسية
     await page.goto("/en/login");
-    await expect(page).toHaveURL(/\/en\/account$/);
+    await expect(page).toHaveURL(/\/en$/);
 
     // غير المدير يحصل على 404 للوحة الإدارة
     const admin = await page.goto("/en/admin");

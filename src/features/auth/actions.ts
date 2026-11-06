@@ -70,7 +70,7 @@ export async function signUp(
   const lang = asLocale(locale);
   if (!(await rateLimit("register", await clientIp()))) return { ok: false, error: "rateLimited" };
 
-  const next = parsed.data.accountType === "organizer" ? `/${lang}/organizer/apply` : `/${lang}/account`;
+  const next = parsed.data.accountType === "organizer" ? `/${lang}/organizer/apply` : `/${lang}`;
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,

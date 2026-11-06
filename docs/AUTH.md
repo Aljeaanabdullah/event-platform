@@ -38,7 +38,7 @@
 1. **Authentication → Sign In / Providers → Google**: فعّله والصق Client ID و Client Secret.
 2. **Authentication → URL Configuration**:
    - Site URL: `http://localhost:3000`
-   - Redirect URLs: `http://localhost:3000/auth/callback` و `http://localhost:3000/auth/confirm`
+   - Redirect URLs: `http://localhost:3000/**` (مع النجوم: روابط العودة تحمل `?next=…`، والمطابقة الحرفية تفشل وتعود إلى Site URL)
 3. **Authentication → Sign In / Providers → Email**: أبقِ _Confirm email_ مفعّلًا. اضبط _Minimum password length_ على **8**.
 4. **Project Settings → API Keys → Secret keys**: انسخ المفتاح إلى `SUPABASE_SECRET_KEY` في `.env.local`.
 

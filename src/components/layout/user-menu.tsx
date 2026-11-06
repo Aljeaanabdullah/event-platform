@@ -16,6 +16,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { signOut } from "@/features/auth/actions";
 import { Link } from "@/i18n/navigation";
+import { getBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 import { routes } from "./nav-links";
@@ -84,6 +85,13 @@ export function UserMenu() {
   }
 
   const { user } = session;
+
+  // الخروج من المتصفح أولًا حتى يتحدث الـ Header فورًا حتى لو بقينا على نفس الصفحة بعد التحويل
+  async function handleSignOut() {
+    await getBrowserClient()?.auth.signOut({ scope: "local" });
+    await signOut(locale);
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -95,7 +103,7 @@ export function UserMenu() {
         >
           <UserAvatar name={user.name} email={user.email} url={user.avatarUrl} />
           <span className="hidden max-w-32 truncate text-sm font-semibold md:inline">
-            {t("greeting", { name: (user.name ?? user.email ?? "").split(/[s@]/)[0] })}
+            {t("greeting", { name: (user.name ?? user.email ?? "").split(/[\s@]/)[0] })}
           </span>
           <ChevronDown className="hidden size-4 text-muted-foreground md:block" aria-hidden />
         </button>
@@ -143,7 +151,7 @@ export function UserMenu() {
           </DropdownMenuItem>
         ) : null}
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive" onSelect={() => signOut(locale)} data-testid="sign-out">
+        <DropdownMenuItem variant="destructive" onSelect={handleSignOut} data-testid="sign-out">
           <LogOut aria-hidden />
           {t("signOut")}
         </DropdownMenuItem>

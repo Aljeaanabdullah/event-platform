@@ -43,7 +43,7 @@ export default async function proxy(request: NextRequest) {
     response = NextResponse.redirect(url);
   } else if (userId && matches(path, GUEST_ONLY)) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${locale}/account`;
+    url.pathname = `/${locale}`;
     url.search = "";
     response = NextResponse.redirect(url);
   } else {
